@@ -1,0 +1,27 @@
+# Sistema / editor
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# Entornos y dependencias
+.venv/
+venv/
+env/
+node_modules/
+__pycache__/
+*.py[cod]
+
+# Salidas y temporales
+build/
+dist/
+*.log
+tmp/
+temp/
+
+# Secretos (nunca subir claves)
+.env
+.env.*
+*.key
+*.pem
