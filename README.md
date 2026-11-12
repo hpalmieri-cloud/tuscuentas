@@ -16,8 +16,8 @@ Sitio estático de calculadoras y guías simples para Argentina. **Sin registro,
 6. Cuota de préstamo (sistema francés)
 7. IVA
 8. Porcentajes
-
-Próximas: Monotributo y Jubilación.
+9. Monotributo (tabla ARCA vigente desde el 1/8/2026)
+10. Jubilación (régimen general)
 
 ## Estructura
 
@@ -40,7 +40,9 @@ Próximas: Monotributo y Jubilación.
    ├─ plazo-fijo/
    ├─ prestamo/
    ├─ iva/
-   └─ porcentaje/
+   ├─ porcentaje/
+   ├─ monotributo/
+   └─ jubilacion/
 ```
 
 Cada carpeta tiene `index.html` y su archivo `.js` con la lógica.
@@ -87,11 +89,10 @@ Y abrí `http://localhost:8000`.
 
 ## Próximas calculadoras
 
-1. Monotributo
-2. Jubilación / haberes
-3. Dólar / conversión
-4. Interés compuesto
-5. Horas extras
+1. Dólar / conversión
+2. Interés compuesto
+3. Horas extras
+4. Guías de trámites (ANSES, ARCA)
 
 ## Notas
 

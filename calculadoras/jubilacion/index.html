@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de jubilación 2026 — Tus Cuentas</title>
+  <meta name="description" content="Calculá a qué edad te jubilás, cuánto falta y cuántos años de aportes te restan según el régimen general de Argentina. Gratis y sin registro.">
+  <meta name="theme-color" content="#0b7a4b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b7a4b'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"¿A qué edad me puedo jubilar en Argentina?","acceptedAnswer":{"@type":"Answer","text":"En el régimen general, las mujeres se jubilan a los 60 años y los hombres a los 65 años, con 30 años de aportes."}},
+      {"@type":"Question","name":"¿Cuántos años de aportes necesito?","acceptedAnswer":{"@type":"Answer","text":"El régimen general exige 30 años de aportes previsionales."}},
+      {"@type":"Question","name":"¿Qué pasa si no tengo 30 años de aportes?","acceptedAnswer":{"@type":"Answer","text":"Existen moratorias y planes de regularización de aportes, además de regímenes especiales. Conviene consultar en ANSES para evaluar cada caso."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">T</span><span>Tus Cuentas</span></a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="../../index.html">Inicio</a>
+        <a href="../../index.html#calculadoras">Calculadoras</a>
+        <a href="../../sobre.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Migas de pan"><a href="../../index.html">Inicio</a> › <span>Jubilación</span></nav>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <h1>Calculadora de jubilación</h1>
+        <p class="lead">Mirá a qué edad te corresponde jubilarte, cuánto falta y cuántos años de aportes te restan.</p>
+
+        <form class="calc" id="form-jubilacion" novalidate>
+          <div class="calc-grid">
+            <div class="field">
+              <label for="nacimiento">Fecha de nacimiento</label>
+              <input id="nacimiento" type="date" autocomplete="off">
+            </div>
+
+            <div class="field">
+              <label for="sexo">Sexo registral</label>
+              <select id="sexo">
+                <option value="mujer">Mujer (60 años)</option>
+                <option value="hombre">Hombre (65 años)</option>
+              </select>
+              <span class="hint">Edad del régimen general. Pueden existir regímenes especiales.</span>
+            </div>
+
+            <div class="field">
+              <label for="aportes">Años de aportes</label>
+              <input id="aportes" type="number" inputmode="numeric" min="0" max="50" step="1" value="0">
+              <span class="hint">Aportes previsionales computables.</span>
+            </div>
+          </div>
+
+          <div class="result-actions">
+            <button class="btn" type="submit">Calcular jubilación</button>
+            <button class="btn btn-secondary btn-small hidden" type="button" id="copiar">Copiar resultado</button>
+          </div>
+
+          <p class="error hidden" id="error" role="alert"></p>
+
+          <div class="result hidden" id="resultado" aria-live="polite">
+            <p class="label" id="resultado-label">Resultado</p>
+            <p class="amount" id="resultado-monto">—</p>
+            <div class="breakdown" id="desglose"></div>
+            <p class="hint" style="margin-top:12px">Régimen general (Ley 24.241). No considera moratorias, regímenes especiales ni tareas insalubres.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Cómo se calcula</h2>
+        <p>En el régimen general se requieren <strong>dos condiciones</strong>:</p>
+        <ul>
+          <li><strong>Edad:</strong> 60 años para mujeres y 65 para hombres.</li>
+          <li><strong>Aportes:</strong> 30 años de servicios con aportes.</li>
+        </ul>
+        <p>La calculadora muestra la edad actual, la fecha estimada en que alcanzás la edad jubilatoria y los años de aportes que te faltan.</p>
+        <p class="note">Hay regímenes especiales (docentes, tareas insalubres, etc.) y moratorias que pueden modificar el resultado. Consultá siempre en ANSES o con un especialista previsional.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq">
+          <details><summary>¿A qué edad me jubilo?</summary><div class="faq-body">En el régimen general: mujeres a los 60 años y hombres a los 65.</div></details>
+          <details><summary>¿Cuántos años de aportes necesito?</summary><div class="faq-body">30 años de aportes previsionales.</div></details>
+          <details><summary>¿Si no llego a los 30 años de aportes?</summary><div class="faq-body">Existen moratorias y planes de pago de aportes. ANSES evalúa cada situación particular.</div></details>
+          <details><summary>¿Los jubilados cobran aguinaldo?</summary><div class="faq-body">Sí. Podés calcularlo con nuestra <a href="../aguinaldo/index.html">calculadora de aguinaldo</a>.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Fuentes</h2>
+        <ul>
+          <li>Ley 24.241 — Sistema Integrado de Jubilaciones y Pensiones.</li>
+          <li>ANSES — Requisitos para jubilarse.</li>
+        </ul>
+        <p class="hint">Última actualización: noviembre de 2026.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><strong>Tus Cuentas</strong><br><span>© <span data-year>2026</span> · Sitio informativo. No reemplaza asesoramiento profesional.</span></div>
+      <nav class="footer-links" aria-label="Enlaces legales"><a href="../../sobre.html">Sobre</a><a href="../../contacto.html">Contacto</a><a href="../../privacidad.html">Privacidad</a></nav>
+    </div>
+  </footer>
+
+  <script src="../../assets/site.js"></script>
+  <script src="jubilacion.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de monotributo 2026 — Tus Cuentas</title>
+  <meta name="description" content="Calculá tu categoría de monotributo según la facturación anual y mirá la cuota mensual vigente desde agosto de 2026. Datos oficiales de ARCA.">
+  <meta name="theme-color" content="#0b7a4b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b7a4b'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"¿Cómo sé qué categoría de monotributo me corresponde?","acceptedAnswer":{"@type":"Answer","text":"La categoría depende de los ingresos brutos anuales y del tipo de actividad (servicios o venta de cosas muebles). Se ubica al contribuyente en la primera categoría cuyo límite de ingresos no sea superado."}},
+      {"@type":"Question","name":"¿Cuánto se paga de monotributo por mes?","acceptedAnswer":{"@type":"Answer","text":"La cuota mensual suma el impuesto integrado, los aportes al SIPA y los aportes a la obra social. Los valores vigentes desde el 1 de agosto de 2026 están detallados en la calculadora."}},
+      {"@type":"Question","name":"¿Qué pasa si supero el límite de la categoría K?","acceptedAnswer":{"@type":"Answer","text":"Si los ingresos superan el límite máximo del monotributo, corresponde pasar al régimen general de IVA y Ganancias, o evaluar la exclusión del régimen simplificado."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">T</span><span>Tus Cuentas</span></a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="../../index.html">Inicio</a>
+        <a href="../../index.html#calculadoras">Calculadoras</a>
+        <a href="../../sobre.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Migas de pan"><a href="../../index.html">Inicio</a> › <span>Monotributo</span></nav>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <h1>Calculadora de monotributo</h1>
+        <p class="lead">Ingresá tu facturación anual estimada y el tipo de actividad. Te decimos la categoría y la cuota mensual vigente.</p>
+
+        <form class="calc" id="form-monotributo" novalidate>
+          <div class="calc-grid">
+            <div class="field">
+              <label for="facturacion">Facturación anual estimada (ARS)</label>
+              <input id="facturacion" type="number" inputmode="numeric" min="0" step="1000" placeholder="Ej.: 15000000" autocomplete="off">
+              <span class="hint">Ingresos brutos de los últimos 12 meses.</span>
+            </div>
+
+            <div class="field">
+              <label for="actividad">Tipo de actividad</label>
+              <select id="actividad">
+                <option value="servicios">Locación y prestación de servicios</option>
+                <option value="bienes">Venta de cosas muebles</option>
+              </select>
+            </div>
+          </div>
+
+          <label class="check">
+            <input type="checkbox" id="jubilado">
+            <span>Soy jubilado/a (exento del aporte de obra social)</span>
+          </label>
+
+          <div class="result-actions">
+            <button class="btn" type="submit">Calcular categoría</button>
+            <button class="btn btn-secondary btn-small hidden" type="button" id="copiar">Copiar resultado</button>
+          </div>
+
+          <p class="error hidden" id="error" role="alert"></p>
+
+          <div class="result hidden" id="resultado" aria-live="polite">
+            <p class="label" id="resultado-label">Categoría</p>
+            <p class="amount" id="resultado-monto">A</p>
+            <div class="breakdown" id="desglose"></div>
+            <p class="hint" style="margin-top:12px">Valores vigentes desde el 1/8/2026, según ARCA. No incluyen otros conceptos provinciales o municipales.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Cómo se calcula</h2>
+        <p>El monotributo se divide en categorías (A a K) según los <strong>ingresos brutos anuales</strong> y el tipo de actividad. Te corresponde la primera categoría cuyo límite de facturación no superés.</p>
+        <p>La cuota mensual suma:</p>
+        <ul>
+          <li><strong>Impuesto integrado</strong> (según categoría y actividad).</li>
+          <li><strong>Aportes al SIPA</strong> (jubilación).</li>
+          <li><strong>Aporte de obra social</strong> (los jubilados están exentos).</li>
+        </ul>
+        <p class="note">Los valores cambian con las actualizaciones de ARCA. Esta calculadora usa la tabla vigente desde el 1/8/2026. Verificá siempre en <a href="https://www.afip.gob.ar/monotributo/categorias.asp" rel="noopener" target="_blank">arca.gob.ar</a>.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq">
+          <details><summary>¿La categoría depende de lo que facturo o de lo que gano?</summary><div class="faq-body">Depende de los ingresos brutos facturados en los últimos 12 meses, no de la ganancia neta.</div></details>
+          <details><summary>¿Los jubilados pagan obra social en el monotributo?</summary><div class="faq-body">No. Los jubilados están exceptuados del aporte de obra social, aunque siguen pagando el impuesto integrado y los aportes al SIPA según corresponda.</div></details>
+          <details><summary>¿Qué pasa si me paso de categoría?</summary><div class="faq-body">Si superás el límite de tu categoría, corresponde recategorizarte. Si superás el límite de la categoría K, quedás excluido del monotributo y pasás al régimen general.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Fuentes</h2>
+        <ul>
+          <li>ARCA (ex AFIP) — Monotributo, montos y categorías vigentes desde el 1/8/2026.</li>
+          <li>Ley 24.977 del Régimen Simplificado para Pequeños Contribuyentes.</li>
+        </ul>
+        <p class="hint">Última actualización: noviembre de 2026.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><strong>Tus Cuentas</strong><br><span>© <span data-year>2026</span> · Sitio informativo. No reemplaza asesoramiento profesional.</span></div>
+      <nav class="footer-links" aria-label="Enlaces legales"><a href="../../sobre.html">Sobre</a><a href="../../contacto.html">Contacto</a><a href="../../privacidad.html">Privacidad</a></nav>
+    </div>
+  </footer>
+
+  <script src="../../assets/site.js"></script>
+  <script src="monotributo.js"></script>
+</body>
+</html>
