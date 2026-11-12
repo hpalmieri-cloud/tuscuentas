@@ -60,7 +60,7 @@
       "Plazo fijo: capital " + fmt(capital) +
       " — interés " + fmt(interes) +
       " — total " + fmt(total) +
-      " (" + renovaciones + " × " + dias + " días). Calculado en calculaargentina.com";
+      " (" + renovaciones + " × " + dias + " días). Calculado en tuscuentas.com.ar";
   }
 
   function fallo(msg) {

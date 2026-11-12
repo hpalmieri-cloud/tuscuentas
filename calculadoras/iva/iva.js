@@ -70,7 +70,7 @@
       "IVA " + tasaPct + "%: neto " + fmt(neto) +
       " — IVA " + fmt(iva) +
       " — total " + fmt(total) +
-      ". Calculado en calculaargentina.com";
+      ". Calculado en tuscuentas.com.ar";
   }
 
   function fallo(msg) {

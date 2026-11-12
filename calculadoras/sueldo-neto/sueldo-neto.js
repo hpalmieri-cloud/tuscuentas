@@ -60,7 +60,7 @@
       "Sueldo bruto: " + fmt(bruto) +
       " — Descuentos: " + fmt(totalDescuentos) +
       " — Sueldo neto estimado: " + fmt(neto) +
-      ". Calculado en calculaargentina.com";
+      ". Calculado en tuscuentas.com.ar";
   }
 
   form.addEventListener("submit", function (e) { e.preventDefault(); calcular(); });

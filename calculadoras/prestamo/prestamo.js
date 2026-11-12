@@ -55,7 +55,7 @@
     ultimoTexto =
       "Préstamo: " + fmt(monto) + " — cuota " + fmt(cuota) +
       " × " + meses + " meses — total " + fmt(total) +
-      " (intereses " + fmt(intereses) + "). Calculado en calculaargentina.com";
+      " (intereses " + fmt(intereses) + "). Calculado en tuscuentas.com.ar";
   }
 
   function fallo(msg) {

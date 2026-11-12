@@ -89,7 +89,7 @@
 
     resultado.classList.remove("hidden");
     btnCopiar.classList.remove("hidden");
-    ultimoTexto = texto + ". Calculado en calculaargentina.com";
+    ultimoTexto = texto + ". Calculado en tuscuentas.com.ar";
   }
 
   function fallo(msg) {

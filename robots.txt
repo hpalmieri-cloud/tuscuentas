@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://calculaargentina.com/sitemap.xml
+Sitemap: https://tuscuentas.com.ar/sitemap.xml

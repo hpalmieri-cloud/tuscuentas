@@ -57,7 +57,7 @@
 
     ultimoTexto =
       "Vacaciones: " + dias + " días — pago estimado " + fmt(pago) +
-      ". Calculado en calculaargentina.com";
+      ". Calculado en tuscuentas.com.ar";
   }
 
   function fallo(msg) {

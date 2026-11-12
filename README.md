@@ -1,6 +1,10 @@
-# Calculá Argentina
+# Tus Cuentas
 
 Sitio estático de calculadoras y guías simples para Argentina. **Sin registro, sin base de datos y sin cookies propias**: todos los cálculos se ejecutan en el navegador.
+
+- **Dominio:** `tuscuentas.com.ar` (registrado, pendiente de activación).
+- **Marca:** Tus Cuentas.
+- **Contacto:** `hola@tuscuentas.com.ar`.
 
 ## Calculadoras disponibles
 
@@ -68,8 +72,8 @@ Y abrí `http://localhost:8000`.
 
 ## Antes de publicar (checklist)
 
-- [ ] Reemplazar `https://calculaargentina.com` en `sitemap.xml` y `robots.txt` por el dominio real.
-- [ ] Reemplazar `hola@calculaargentina.com` en `contacto.html` y `privacidad.html`.
+- [ ] Reemplazar `https://tuscuentas.com.ar` en `sitemap.xml` y `robots.txt` por el dominio real.
+- [ ] Reemplazar `hola@tuscuentas.com.ar` en `contacto.html` y `privacidad.html`.
 - [ ] Revisar fórmulas y parámetros con la normativa vigente.
 - [ ] Probar todas las calculadoras en el celular.
 - [ ] Configurar Google Search Console y enviar el sitemap.

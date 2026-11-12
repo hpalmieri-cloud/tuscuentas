@@ -71,7 +71,7 @@
       "Indemnización estimada: " + fmt(total) +
       " (antigüedad: " + aniosComputables + " años" +
       (checkPreaviso.checked ? ", preaviso incluido" : "") +
-      "). Calculado en calculaargentina.com";
+      "). Calculado en tuscuentas.com.ar";
   }
 
   function fallo(msg) {

@@ -118,7 +118,7 @@
       "Aguinaldo " + (proporcion === 1 ? "estimado" : "proporcional") + ": " + fmt(total) +
       " — " + etiquetaPeriodo +
       (descuentos ? " — En mano aprox.: " + fmt(neto) : "") +
-      ". Calculado en calculaargentina.com";
+      ". Calculado en tuscuentas.com.ar";
   }
 
   form.addEventListener("submit", function (e) {
