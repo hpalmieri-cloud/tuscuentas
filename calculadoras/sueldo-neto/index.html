@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de sueldo neto 2026 — Calculá Argentina</title>
+  <meta name="description" content="Calculá tu sueldo neto en Argentina: descuentos de jubilación, obra social y PAMI sobre el bruto. Estimado en segundos y sin registro.">
+  <meta name="theme-color" content="#0b7a4b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b7a4b'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' fill='white' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"¿Qué descuentos se aplican al sueldo bruto en Argentina?","acceptedAnswer":{"@type":"Answer","text":"Los aportes del trabajador en relación de dependencia son: jubilación (11%), PAMI (3%) y obra social (3%). Si está afiliado a un sindicato, se suma el 2% de cuota sindical."}},
+      {"@type":"Question","name":"¿La calculadora incluye el Impuesto a las Ganancias?","acceptedAnswer":{"@type":"Answer","text":"No. La calculadora estima los aportes previsionales y de obra social. El Impuesto a las Ganancias depende de la situación personal y de las escalas vigentes."}},
+      {"@type":"Question","name":"¿Cómo se pasa de sueldo bruto a neto?","acceptedAnswer":{"@type":"Answer","text":"Se resta al bruto el total de aportes. Por ejemplo, con los descuentos generales del 17%, el neto es el 83% del bruto."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">C</span><span>Calculá Argentina</span></a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="../../index.html">Inicio</a>
+        <a href="../../index.html#calculadoras">Calculadoras</a>
+        <a href="../../sobre.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Migas de pan"><a href="../../index.html">Inicio</a> › <span>Sueldo neto</span></nav>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <h1>Calculadora de sueldo neto</h1>
+        <p class="lead">Ingresá tu sueldo bruto mensual y mirá cuánto te queda después de los aportes. El cálculo se hace en tu navegador.</p>
+
+        <form class="calc" id="form-sueldo" novalidate>
+          <div class="calc-grid">
+            <div class="field">
+              <label for="bruto">Sueldo bruto mensual (ARS)</label>
+              <input id="bruto" type="number" inputmode="numeric" min="0" step="1000" placeholder="Ej.: 850000" autocomplete="off">
+              <span class="hint">El total antes de descuentos.</span>
+            </div>
+          </div>
+
+          <label class="check">
+            <input type="checkbox" id="sindicato">
+            <span>Estoy afiliado a un sindicato (cuota del 2%)</span>
+          </label>
+
+          <div class="result-actions">
+            <button class="btn" type="submit">Calcular sueldo neto</button>
+            <button class="btn btn-secondary btn-small hidden" type="button" id="copiar">Copiar resultado</button>
+          </div>
+
+          <p class="error hidden" id="error" role="alert"></p>
+
+          <div class="result hidden" id="resultado" aria-live="polite">
+            <p class="label">Sueldo neto estimado</p>
+            <p class="amount" id="resultado-monto">$0</p>
+            <div class="breakdown" id="desglose"></div>
+            <p class="hint" style="margin-top:12px">No incluye Impuesto a las Ganancias ni otros descuentos particulares.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Cómo se calcula</h2>
+        <p>Al sueldo bruto se le descuentan los aportes del trabajador:</p>
+        <ul>
+          <li><strong>Jubilación:</strong> 11%</li>
+          <li><strong>PAMI:</strong> 3%</li>
+          <li><strong>Obra social:</strong> 3%</li>
+          <li><strong>Sindicato:</strong> 2% (solo si estás afiliado)</li>
+        </ul>
+        <p>Con los descuentos generales, el neto equivale al <strong>83% del bruto</strong> (o al 81% si sumás sindicato).</p>
+        <p class="note">Es una estimación. El Impuesto a las Ganancias, las contribuciones patronales y los adicionales de convenio pueden modificar el resultado final.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq">
+          <details><summary>¿Qué descuentos se aplican?</summary><div class="faq-body">Jubilación (11%), PAMI (3%) y obra social (3%). Si estás afiliado a un sindicato, se suma el 2% de la cuota sindical.</div></details>
+          <details><summary>¿Incluye Ganancias?</summary><div class="faq-body">No. El Impuesto a las Ganancias depende de tu situación personal, deducciones y escalas vigentes; por eso no se estima acá.</div></details>
+          <details><summary>¿Sirve para jubilados?</summary><div class="faq-body">No exactamente. Los jubilados tienen otro régimen de descuentos (PAMI y obra social), sin los aportes jubilatorios del 11%.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Fuentes</h2>
+        <ul>
+          <li>Ley 24.241 (Sistema Integrado de Jubilaciones y Pensiones).</li>
+          <li>Ley 23.660 (Obras Sociales).</li>
+          <li>Ley 19.032 (PAMI).</li>
+        </ul>
+        <p class="hint">Última actualización: noviembre de 2026.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><strong>Calculá Argentina</strong><br><span>© <span data-year>2026</span> · Sitio informativo. No reemplaza asesoramiento profesional.</span></div>
+      <nav class="footer-links" aria-label="Enlaces legales"><a href="../../sobre.html">Sobre</a><a href="../../contacto.html">Contacto</a><a href="../../privacidad.html">Privacidad</a></nav>
+    </div>
+  </footer>
+
+  <script src="../../assets/site.js"></script>
+  <script src="sueldo-neto.js"></script>
+</body>
+</html>

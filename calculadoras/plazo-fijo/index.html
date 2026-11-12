@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de plazo fijo 2026 — Calculá Argentina</title>
+  <meta name="description" content="Calculá cuánto ganás con un plazo fijo: interés, monto final y tasa efectiva. Ingresá capital, TNA y días. Gratis y sin registro.">
+  <meta name="theme-color" content="#0b7a4b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b7a4b'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' fill='white' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"¿Cómo se calcula el interés de un plazo fijo?","acceptedAnswer":{"@type":"Answer","text":"Con interés simple: capital multiplicado por la TNA, por los días y dividido por 365."}},
+      {"@type":"Question","name":"¿Qué es la TNA?","acceptedAnswer":{"@type":"Answer","text":"La Tasa Nominal Anual es la tasa que informa el banco. Para un plazo de 30 días, el interés se calcula proporcionalmente a esos días."}},
+      {"@type":"Question","name":"¿Los intereses se reinvierten?","acceptedAnswer":{"@type":"Answer","text":"Solo si renovás el plazo fijo e incluís los intereses en el nuevo capital. Esta calculadora permite estimar varias renovaciones."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">C</span><span>Calculá Argentina</span></a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="../../index.html">Inicio</a>
+        <a href="../../index.html#calculadoras">Calculadoras</a>
+        <a href="../../sobre.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Migas de pan"><a href="../../index.html">Inicio</a> › <span>Plazo fijo</span></nav>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <h1>Calculadora de plazo fijo</h1>
+        <p class="lead">Ingresá el capital, la tasa y el plazo para ver el interés y el monto final.</p>
+
+        <form class="calc" id="form-plazo" novalidate>
+          <div class="calc-grid">
+            <div class="field">
+              <label for="capital">Capital a invertir (ARS)</label>
+              <input id="capital" type="number" inputmode="numeric" min="0" step="1000" placeholder="Ej.: 1000000" autocomplete="off">
+            </div>
+
+            <div class="field">
+              <label for="tna">TNA (%)</label>
+              <input id="tna" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Ej.: 45" autocomplete="off">
+              <span class="hint">Tasa Nominal Anual que informa el banco.</span>
+            </div>
+
+            <div class="field">
+              <label for="dias">Plazo (días)</label>
+              <input id="dias" type="number" inputmode="numeric" min="1" max="730" step="1" value="30">
+            </div>
+
+            <div class="field">
+              <label for="renovaciones">Cantidad de renovaciones</label>
+              <input id="renovaciones" type="number" inputmode="numeric" min="1" max="120" step="1" value="1">
+              <span class="hint">1 = un solo plazo fijo. Más de 1 reinvierte capital e intereses.</span>
+            </div>
+          </div>
+
+          <div class="result-actions">
+            <button class="btn" type="submit">Calcular plazo fijo</button>
+            <button class="btn btn-secondary btn-small hidden" type="button" id="copiar">Copiar resultado</button>
+          </div>
+
+          <p class="error hidden" id="error" role="alert"></p>
+
+          <div class="result hidden" id="resultado" aria-live="polite">
+            <p class="label">Monto final estimado</p>
+            <p class="amount" id="resultado-monto">$0</p>
+            <div class="breakdown" id="desglose"></div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Cómo se calcula</h2>
+        <p><strong>Interés simple:</strong> capital × (TNA ÷ 100) × (días ÷ 365).</p>
+        <p><strong>Con renovaciones:</strong> el monto final se calcula como capital × (1 + tasa del período)<sup>renovaciones</sup>, reinvirtiendo los intereses.</p>
+        <p class="note">Es una estimación. Los bancos pueden aplicar redondeos, impuestos o condiciones particulares. Verificá siempre la tasa y las condiciones en la entidad.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq">
+          <details><summary>¿Qué es la TNA?</summary><div class="faq-body">La Tasa Nominal Anual es la tasa que publica el banco. Para plazos menores a un año, el interés se calcula en proporción a los días.</div></details>
+          <details><summary>¿Conviene reinvertir?</summary><div class="faq-body">Reinvertir los intereses genera interés compuesto, pero depende de las tasas disponibles en cada renovación.</div></details>
+          <details><summary>¿Se descuentan impuestos?</summary><div class="faq-body">Esta calculadora no incluye impuestos ni retenciones. El resultado es el rendimiento bruto estimado.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Fuentes</h2>
+        <ul><li>Banco Central de la República Argentina — tasas y condiciones de plazo fijo.</li></ul>
+        <p class="hint">Última actualización: noviembre de 2026.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><strong>Calculá Argentina</strong><br><span>© <span data-year>2026</span> · Sitio informativo. No reemplaza asesoramiento profesional.</span></div>
+      <nav class="footer-links" aria-label="Enlaces legales"><a href="../../sobre.html">Sobre</a><a href="../../contacto.html">Contacto</a><a href="../../privacidad.html">Privacidad</a></nav>
+    </div>
+  </footer>
+
+  <script src="../../assets/site.js"></script>
+  <script src="plazo-fijo.js"></script>
+</body>
+</html>

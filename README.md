@@ -2,11 +2,18 @@
 
 Sitio estático de calculadoras y guías simples para Argentina. **Sin registro, sin base de datos y sin cookies propias**: todos los cálculos se ejecutan en el navegador.
 
-## Estado
+## Calculadoras disponibles
 
-- Calculadora de **aguinaldo (SAC)** funcionando.
-- Páginas institucionales: Inicio, Sobre, Contacto y Privacidad.
-- Listo para publicar gratis (Cloudflare Pages, Netlify o GitHub Pages).
+1. Aguinaldo (SAC)
+2. Sueldo neto
+3. Indemnización por despido
+4. Vacaciones
+5. Plazo fijo
+6. Cuota de préstamo (sistema francés)
+7. IVA
+8. Porcentajes
+
+Próximas: Monotributo y Jubilación.
 
 ## Estructura
 
@@ -20,24 +27,31 @@ Sitio estático de calculadoras y guías simples para Argentina. **Sin registro,
 ├─ sitemap.xml                 Mapa del sitio (reemplazar dominio)
 ├─ assets/
 │  ├─ styles.css               Estilos (sin frameworks)
-│  └─ site.js                  Utilidades mínimas
+│  └─ site.js                  Utilidades mínimas (formato ARS, copiar)
 └─ calculadoras/
-   └─ aguinaldo/
-      ├─ index.html            Calculadora de aguinaldo
-      └─ aguinaldo.js          Lógica del cálculo
+   ├─ aguinaldo/
+   ├─ sueldo-neto/
+   ├─ indemnizacion/
+   ├─ vacaciones/
+   ├─ plazo-fijo/
+   ├─ prestamo/
+   ├─ iva/
+   └─ porcentaje/
 ```
+
+Cada carpeta tiene `index.html` y su archivo `.js` con la lógica.
 
 ## Cómo verlo en tu PC
 
 **Opción 1:** abrí `index.html` con doble clic.
 
-**Opción 2 (recomendada):** si tenés Python instalado, desde la carpeta del proyecto:
+**Opción 2:** si instalás Python, desde la carpeta del proyecto:
 
 ```powershell
 python -m http.server 8000
 ```
 
-Y abrí `http://localhost:8000` en el navegador.
+Y abrí `http://localhost:8000`.
 
 ## Cómo publicarlo gratis
 
@@ -45,7 +59,7 @@ Y abrí `http://localhost:8000` en el navegador.
 1. Crear cuenta en `pages.cloudflare.com`.
 2. "Create a project" → "Direct upload" (o conectar el repo de GitHub).
 3. Subir la carpeta completa del proyecto.
-4. Te da una URL tipo `tu-proyecto.pages.dev`.
+4. URL tipo `tu-proyecto.pages.dev`.
 
 ### GitHub Pages
 1. Crear un repositorio en GitHub y subir el contenido.
@@ -56,8 +70,8 @@ Y abrí `http://localhost:8000` en el navegador.
 
 - [ ] Reemplazar `https://calculaargentina.com` en `sitemap.xml` y `robots.txt` por el dominio real.
 - [ ] Reemplazar `hola@calculaargentina.com` en `contacto.html` y `privacidad.html`.
-- [ ] Revisar datos de la calculadora con la normativa vigente.
-- [ ] Probar en el celular.
+- [ ] Revisar fórmulas y parámetros con la normativa vigente.
+- [ ] Probar todas las calculadoras en el celular.
 - [ ] Configurar Google Search Console y enviar el sitemap.
 
 ## AdSense (cuando haya contenido)
@@ -69,11 +83,11 @@ Y abrí `http://localhost:8000` en el navegador.
 
 ## Próximas calculadoras
 
-1. Sueldo neto
-2. Indemnización por despido
-3. Monotributo
-4. Plazo fijo
-5. Jubilación / haberes
+1. Monotributo
+2. Jubilación / haberes
+3. Dólar / conversión
+4. Interés compuesto
+5. Horas extras
 
 ## Notas
 

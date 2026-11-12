@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de indemnización por despido 2026 — Calculá Argentina</title>
+  <meta name="description" content="Estimá la indemnización por despido sin justa causa en Argentina: antigüedad, preaviso y total orientativo. Cálculo local y sin registro.">
+  <meta name="theme-color" content="#0b7a4b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b7a4b'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' fill='white' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"¿Cómo se calcula la indemnización por despido sin justa causa?","acceptedAnswer":{"@type":"Answer","text":"El artículo 245 de la Ley de Contrato de Trabajo establece un mes de sueldo por cada año de servicio o fracción mayor a tres meses, tomando como base la mejor remuneración mensual del último año."}},
+      {"@type":"Question","name":"¿Cuánto corresponde de preaviso?","acceptedAnswer":{"@type":"Answer","text":"Un mes de sueldo si la antigüedad es menor a cinco años y dos meses si es mayor, según el artículo 231 de la Ley 20.744."}},
+      {"@type":"Question","name":"¿Qué rubros no incluye esta calculadora?","acceptedAnswer":{"@type":"Answer","text":"No incluye SAC proporcional, vacaciones no gozadas, integración del mes de despido, multas ni otros rubros que puedan corresponder. Es una estimación orientativa."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">C</span><span>Calculá Argentina</span></a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="../../index.html">Inicio</a>
+        <a href="../../index.html#calculadoras">Calculadoras</a>
+        <a href="../../sobre.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Migas de pan"><a href="../../index.html">Inicio</a> › <span>Indemnización</span></nav>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <h1>Calculadora de indemnización por despido</h1>
+        <p class="lead">Estimación orientativa para despidos sin justa causa en relación de dependencia. Completá los datos y mirá el resultado.</p>
+
+        <form class="calc" id="form-indemnizacion" novalidate>
+          <div class="calc-grid">
+            <div class="field">
+              <label for="sueldo">Mejor sueldo bruto mensual del último año (ARS)</label>
+              <input id="sueldo" type="number" inputmode="numeric" min="0" step="1000" placeholder="Ej.: 850000" autocomplete="off">
+            </div>
+
+            <div class="field">
+              <label for="anios">Antigüedad: años</label>
+              <input id="anios" type="number" inputmode="numeric" min="0" max="60" step="1" value="0">
+            </div>
+
+            <div class="field">
+              <label for="meses">Antigüedad: meses adicionales</label>
+              <input id="meses" type="number" inputmode="numeric" min="0" max="11" step="1" value="0">
+              <span class="hint">La fracción mayor a 3 meses cuenta como un año completo.</span>
+            </div>
+          </div>
+
+          <label class="check">
+            <input type="checkbox" id="incluir-preaviso" checked>
+            <span>Incluir preaviso (1 mes si tenés menos de 5 años; 2 meses si tenés 5 o más)</span>
+          </label>
+
+          <div class="result-actions">
+            <button class="btn" type="submit">Calcular indemnización</button>
+            <button class="btn btn-secondary btn-small hidden" type="button" id="copiar">Copiar resultado</button>
+          </div>
+
+          <p class="error hidden" id="error" role="alert"></p>
+
+          <div class="result hidden" id="resultado" aria-live="polite">
+            <p class="label">Total estimado</p>
+            <p class="amount" id="resultado-monto">$0</p>
+            <div class="breakdown" id="desglose"></div>
+            <p class="hint" style="margin-top:12px">No incluye SAC proporcional, vacaciones no gozadas, integración del mes de despido ni multas.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Cómo se calcula</h2>
+        <p><strong>Indemnización por antigüedad (art. 245):</strong> un mes de sueldo por cada año de servicio o fracción mayor a tres meses, tomando la mejor remuneración mensual del último año.</p>
+        <p><strong>Preaviso (art. 231):</strong> un mes de sueldo si la antigüedad es menor a cinco años; dos meses si es de cinco años o más.</p>
+        <p class="note">Es una estimación orientativa. La liquidación final puede incluir otros rubros (SAC proporcional, vacaciones, integración del mes de despido, multas) y depende de cada caso. Consultá con un abogado laboral.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq">
+          <details><summary>¿Qué sueldo se toma como base?</summary><div class="faq-body">La mejor remuneración mensual del último año, incluyendo adicionales habituales. No se toma el promedio.</div></details>
+          <details><summary>¿Cómo cuento la antigüedad?</summary><div class="faq-body">Años completos más los meses adicionales. Si la fracción supera los 3 meses, se cuenta como un año más.</div></details>
+          <details><summary>¿Incluye vacaciones y aguinaldo?</summary><div class="faq-body">No. Esta calculadora solo estima antigüedad y preaviso. El SAC proporcional y las vacaciones no gozadas se liquidan aparte.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Fuentes</h2>
+        <ul>
+          <li>Ley 20.744 de Contrato de Trabajo, artículos 231 y 245.</li>
+          <li>Ley 27.073 (plazos de pago).</li>
+        </ul>
+        <p class="hint">Última actualización: noviembre de 2026.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><strong>Calculá Argentina</strong><br><span>© <span data-year>2026</span> · Sitio informativo. No reemplaza asesoramiento profesional.</span></div>
+      <nav class="footer-links" aria-label="Enlaces legales"><a href="../../sobre.html">Sobre</a><a href="../../contacto.html">Contacto</a><a href="../../privacidad.html">Privacidad</a></nav>
+    </div>
+  </footer>
+
+  <script src="../../assets/site.js"></script>
+  <script src="indemnizacion.js"></script>
+</body>
+</html>
