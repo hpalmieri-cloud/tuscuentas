@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de aguinaldo 2026 — Calculá Argentina</title>
+  <meta name="description" content="Calculá tu aguinaldo (SAC) 2026 en segundos: monto bruto, proporcional por días trabajados, cuotas de junio y diciembre y estimado en mano.">
+  <meta name="theme-color" content="#0b7a4b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b7a4b'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' fill='white' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Cuándo se paga el aguinaldo en Argentina?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El aguinaldo se paga en dos cuotas: la primera hasta el 30 de junio y la segunda hasta el 18 de diciembre, según la Ley 27.073."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿El aguinaldo se calcula sobre el sueldo bruto o neto?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Se calcula sobre la mejor remuneración bruta del semestre. Luego, al cobrarlo, se aplican los descuentos de ley (jubilación, obra social y PAMI)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo se calcula el aguinaldo si trabajé menos de seis meses?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Se calcula de forma proporcional: (mejor remuneración / 2) multiplicado por los días trabajados en el semestre y dividido por 180."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Los jubilados cobran aguinaldo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Los jubilados y pensionados cobran el SAC sobre el mejor haber del semestre, y se liquida junto con los haberes de junio y diciembre."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Los monotributistas cobran aguinaldo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. El aguinaldo corresponde a trabajadores en relación de dependencia y a jubilados; los monotributistas no lo perciben."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Las horas extras entran en el cálculo del aguinaldo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Las horas extras habituales forman parte de la mejor remuneración del semestre y, por lo tanto, se incluyen en el cálculo."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../../index.html">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span>Calculá Argentina</span>
+      </a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="../../index.html">Inicio</a>
+        <a href="../../index.html#calculadoras">Calculadoras</a>
+        <a href="../../sobre.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Migas de pan">
+        <a href="../../index.html">Inicio</a> › <span>Aguinaldo</span>
+      </nav>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <h1>Calculadora de aguinaldo 2026</h1>
+        <p class="lead">Ingresá tu mejor sueldo bruto del semestre. El cálculo se hace en tu navegador: no se envía nada a ningún servidor.</p>
+
+        <form class="calc" id="form-aguinaldo" novalidate>
+          <div class="calc-grid">
+            <div class="field">
+              <label for="mejor-sueldo">Mejor sueldo bruto del semestre (ARS)</label>
+              <input id="mejor-sueldo" name="mejor-sueldo" type="number" inputmode="numeric" min="0" step="1000" placeholder="Ej.: 850000" autocomplete="off">
+              <span class="hint">Es la remuneración mensual más alta del semestre, no el promedio.</span>
+            </div>
+
+            <div class="field">
+              <label for="semestre">Semestre</label>
+              <select id="semestre" name="semestre">
+                <option value="1">1º semestre (enero–junio)</option>
+                <option value="2">2º semestre (julio–diciembre)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="situacion">Situación</label>
+              <select id="situacion" name="situacion">
+                <option value="dependencia">Relación de dependencia</option>
+                <option value="jubilado">Jubilado/a o pensionado/a</option>
+                <option value="monotributista">Monotributista</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="dias-trabajados">Días trabajados en el semestre</label>
+              <input id="dias-trabajados" name="dias-trabajados" type="number" inputmode="numeric" min="1" max="180" step="1" value="180">
+              <span class="hint">De 1 a 180. Si trabajaste todo el semestre, dejá 180.</span>
+            </div>
+          </div>
+
+          <label class="check">
+            <input type="checkbox" id="semestre-completo" checked>
+            <span>Trabajé todo el semestre (180 días)</span>
+          </label>
+
+          <label class="check">
+            <input type="checkbox" id="aplicar-descuentos">
+            <span>Estimar el monto en mano (descuentos aproximados del 17%)</span>
+          </label>
+
+          <div class="result-actions">
+            <button class="btn" type="submit">Calcular aguinaldo</button>
+            <button class="btn btn-secondary btn-small hidden" type="button" id="copiar">Copiar resultado</button>
+          </div>
+
+          <p class="error hidden" id="error" role="alert"></p>
+
+          <div class="result hidden" id="resultado" aria-live="polite">
+            <p class="label" id="resultado-label">Aguinaldo bruto estimado</p>
+            <p class="amount" id="resultado-monto">$0</p>
+            <div class="breakdown" id="desglose"></div>
+            <p class="hint" id="nota-pago" style="margin-top:12px"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Cómo se calcula el aguinaldo</h2>
+        <p>El Sueldo Anual Complementario (SAC) equivale al <strong>50% de la mejor remuneración mensual</strong> del semestre. Se paga en dos cuotas: la primera en junio y la segunda en diciembre.</p>
+        <p>Si trabajaste menos de seis meses, el cálculo es proporcional a los días trabajados:</p>
+        <p><strong>Aguinaldo proporcional = (mejor sueldo ÷ 2) × (días trabajados ÷ 180)</strong></p>
+        <ul>
+          <li><strong>Relación de dependencia:</strong> se toma el mejor sueldo bruto del semestre.</li>
+          <li><strong>Jubilados y pensionados:</strong> se toma el mejor haber del semestre; se liquida con junio y diciembre.</li>
+          <li><strong>Monotributistas:</strong> no corresponde el SAC.</li>
+          <li><strong>Horas extras:</strong> si son habituales, integran la mejor remuneración.</li>
+        </ul>
+        <p class="note">Los resultados son estimaciones informativas. Para una liquidación oficial, consultá con un contador o con el organismo correspondiente (ANSES, AFIP o tu empleador).</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq">
+          <details>
+            <summary>¿Cuándo se paga el aguinaldo?</summary>
+            <div class="faq-body">La primera cuota se abona hasta el <strong>30 de junio</strong> y la segunda hasta el <strong>18 de diciembre</strong>, según la Ley 27.073. Para jubilados, ANSES lo liquida junto con los haberes de junio y diciembre.</div>
+          </details>
+          <details>
+            <summary>¿Se calcula sobre el sueldo bruto o el neto?</summary>
+            <div class="faq-body">Sobre el <strong>bruto</strong>. Al momento del pago se aplican los descuentos de ley: jubilación (11%), obra social (3%) y PAMI (3%), entre otros.</div>
+          </details>
+          <details>
+            <summary>¿Qué pasa si trabajé menos de seis meses?</summary>
+            <div class="faq-body">Se paga de forma proporcional a los días trabajados en el semestre: (mejor sueldo ÷ 2) × (días ÷ 180).</div>
+          </details>
+          <details>
+            <summary>¿Las horas extras cuentan?</summary>
+            <div class="faq-body">Sí, si son habituales. Las horas extras forman parte de la mejor remuneración del semestre y se incluyen en la base de cálculo.</div>
+          </details>
+          <details>
+            <summary>¿Los jubilados cobran aguinaldo?</summary>
+            <div class="faq-body">Sí. Cobran el 50% del mejor haber del semestre, en dos pagos: con los haberes de junio y de diciembre.</div>
+          </details>
+          <details>
+            <summary>¿Los monotributistas cobran aguinaldo?</summary>
+            <div class="faq-body">No. El SAC corresponde a trabajadores en relación de dependencia y a jubilados. Los monotributistas no lo perciben.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Fuentes</h2>
+        <ul>
+          <li>Ley 20.744 de Contrato de Trabajo, artículos 121 a 123 (SAC).</li>
+          <li>Ley 27.073 (plazo de pago de la segunda cuota).</li>
+          <li>ANSES — Calendario de pagos y liquidación de haberes.</li>
+        </ul>
+        <p class="hint">Última actualización: noviembre de 2026.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Calculá Argentina</strong><br>
+        <span>© <span data-year>2026</span> · Sitio informativo. No reemplaza asesoramiento profesional.</span>
+      </div>
+      <nav class="footer-links" aria-label="Enlaces legales">
+        <a href="../../sobre.html">Sobre</a>
+        <a href="../../contacto.html">Contacto</a>
+        <a href="../../privacidad.html">Privacidad</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../../assets/site.js"></script>
+  <script src="aguinaldo.js"></script>
+</body>
+</html>
