@@ -22,6 +22,13 @@ Sitio estático de calculadoras y guías simples para Argentina. **Sin registro,
 12. Interés compuesto
 13. Horas extras
 
+## Guías disponibles
+
+1. Cómo se calcula el aguinaldo
+2. Cómo leer un recibo de sueldo
+3. Monotributo: inscripción y recategorización
+4. Trámite de jubilación en ANSES
+
 ## Estructura
 
 ```
@@ -35,6 +42,12 @@ Sitio estático de calculadoras y guías simples para Argentina. **Sin registro,
 ├─ assets/
 │  ├─ styles.css               Estilos (sin frameworks)
 │  └─ site.js                  Utilidades mínimas (formato ARS, copiar)
+├─ guias/
+│  ├─ index.html               Índice de guías
+│  ├─ aguinaldo-como-se-calcula/
+│  ├─ recibo-de-sueldo/
+│  ├─ monotributo-como-inscribirse/
+│  └─ jubilacion-tramite-anses/
 └─ calculadoras/
    ├─ aguinaldo/
    ├─ sueldo-neto/
@@ -87,19 +100,25 @@ Y abrí `http://localhost:8000`.
 - [ ] Probar todas las calculadoras en el celular.
 - [ ] Configurar Google Search Console y enviar el sitemap.
 
-## AdSense (cuando haya contenido)
+## AdSense (en preparación)
 
-1. Publicar al menos 15–20 páginas con contenido original y útil.
-2. Verificar que estén: Inicio, Sobre, Contacto y Privacidad.
-3. Solicitar revisión en AdSense.
-4. Recién después insertar el código de anuncios.
+1. [x] Publicar 15–20 páginas con contenido original y útil (hoy hay 22: inicio, 13 calculadoras, 5 guías y 3 legales).
+2. [x] Incluir Inicio, Sobre, Contacto, Privacidad y Guías.
+3. [x] Detallar publicidad y cookies en la política de privacidad.
+4. [ ] Crear la cuenta en `adsense.google.com`.
+5. [ ] Agregar el sitio y copiar el script de verificación en el `<head>`.
+6. [ ] Crear `ads.txt` con el publisher ID (`pub-...`).
+7. [ ] Solicitar la revisión (puede tardar días o semanas).
+8. [ ] Después de la aprobación: insertar los bloques de anuncio y activar el mensaje de consentimiento para EEA/Reino Unido.
+
+**Importante:** no insertar bloques de anuncios antes de la aprobación.
 
 ## Próximas calculadoras
 
-1. Guías de trámites (ANSES, ARCA)
-2. Sueldo para jubilados
-3. Ahorro / meta de ahorro
-4. Conversor de unidades
+1. Sueldo para jubilados
+2. Ahorro / meta de ahorro
+3. Conversor de unidades
+4. Más guías de trámites (ANSES, ARCA)
 
 ## Notas
 
