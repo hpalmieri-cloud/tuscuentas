@@ -27,7 +27,7 @@
       <nav class="nav" aria-label="Navegación principal">
         <a href="../../index.html">Inicio</a>
         <a href="../../index.html#calculadoras">Calculadoras</a>
-        <a href="../../sobre.html">Sobre</a>
+        <a href="../../sobre.html">Sobre nosotros</a>
       </nav>
     </div>
   </header>
@@ -46,12 +46,12 @@
           <div class="calc-grid">
             <div class="field">
               <label for="capital">Capital inicial (ARS)</label>
-              <input id="capital" type="number" inputmode="numeric" min="0" step="1000" placeholder="Ej.: 1000000" autocomplete="off">
+              <input id="capital" type="text" inputmode="decimal" data-money min="0" placeholder="Ej.: 1.000.000" autocomplete="off">
             </div>
 
             <div class="field">
               <label for="aporte">Aporte mensual (ARS)</label>
-              <input id="aporte" type="number" inputmode="numeric" min="0" step="1000" value="0" autocomplete="off">
+              <input id="aporte" type="text" inputmode="decimal" data-money min="0" placeholder="Ej.: 50.000" autocomplete="off">
               <span class="hint">Se considera al final de cada mes.</span>
             </div>
 

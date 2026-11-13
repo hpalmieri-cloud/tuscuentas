@@ -24,7 +24,7 @@
     error.textContent = "";
     error.classList.add("hidden");
 
-    var capital = parseFloat(inputCapital.value);
+    var capital = window.getMoneyValue(inputCapital);
     var tna = parseFloat(inputTna.value);
     var dias = parseInt(inputDias.value, 10);
     var renovaciones = parseInt(inputRenov.value, 10);

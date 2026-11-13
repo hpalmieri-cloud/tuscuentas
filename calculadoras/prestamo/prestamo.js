@@ -23,7 +23,7 @@
     error.textContent = "";
     error.classList.add("hidden");
 
-    var monto = parseFloat(inputMonto.value);
+    var monto = window.getMoneyValue(inputMonto);
     var tasa = parseFloat(inputTasa.value);
     var meses = parseInt(inputMeses.value, 10);
 

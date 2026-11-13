@@ -31,7 +31,7 @@
     error.textContent = "";
     error.classList.add("hidden");
 
-    var monto = parseFloat(inputMonto.value);
+    var monto = window.getMoneyValue(inputMonto);
     var tasaPct = obtenerTasa();
 
     if (!isFinite(monto) || monto <= 0) return fallo("Ingresá un monto mayor a cero.");

@@ -47,7 +47,7 @@
     limpiarError();
 
     var situacion = selectSituacion.value;
-    var mejor = parseFloat(inputSueldo.value);
+    var mejor = window.getMoneyValue(inputSueldo);
 
     if (situacion === "monotributista") {
       resultadoLabel.textContent = "No corresponde";

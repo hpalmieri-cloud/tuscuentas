@@ -39,7 +39,7 @@
     error.textContent = "";
     error.classList.add("hidden");
 
-    var facturacion = parseFloat(inputFacturacion.value);
+    var facturacion = window.getMoneyValue(inputFacturacion);
     if (!isFinite(facturacion) || facturacion < 0) {
       return fallo("Ingresá tu facturación anual estimada.");
     }

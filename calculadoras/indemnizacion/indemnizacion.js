@@ -24,7 +24,7 @@
     error.textContent = "";
     error.classList.add("hidden");
 
-    var sueldo = parseFloat(inputSueldo.value);
+    var sueldo = window.getMoneyValue(inputSueldo);
     var anios = parseInt(inputAnios.value, 10);
     var meses = parseInt(inputMeses.value, 10);
 

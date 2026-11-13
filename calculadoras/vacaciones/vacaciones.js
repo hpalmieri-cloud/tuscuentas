@@ -30,7 +30,7 @@
     error.textContent = "";
     error.classList.add("hidden");
 
-    var sueldo = parseFloat(inputSueldo.value);
+    var sueldo = window.getMoneyValue(inputSueldo);
     var antiguedad = parseInt(inputAntiguedad.value, 10);
     var dias = parseInt(inputDias.value, 10);
 

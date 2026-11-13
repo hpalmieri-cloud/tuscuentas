@@ -21,7 +21,7 @@
     error.textContent = "";
     error.classList.add("hidden");
 
-    var bruto = parseFloat(inputBruto.value);
+    var bruto = window.getMoneyValue(inputBruto);
     if (!isFinite(bruto) || bruto <= 0) {
       error.textContent = "Ingresá un sueldo bruto mayor a cero.";
       error.classList.remove("hidden");

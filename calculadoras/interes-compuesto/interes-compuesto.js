@@ -24,8 +24,8 @@
     error.textContent = "";
     error.classList.add("hidden");
 
-    var capital = parseFloat(inputCapital.value) || 0;
-    var aporte = parseFloat(inputAporte.value) || 0;
+    var capital = window.getMoneyValue(inputCapital) || 0;
+    var aporte = window.getMoneyValue(inputAporte) || 0;
     var tasaAnual = parseFloat(inputTasa.value);
     var anios = parseInt(inputAnios.value, 10);
 

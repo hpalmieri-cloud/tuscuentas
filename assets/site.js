@@ -52,4 +52,93 @@
       maximumFractionDigits: 0,
     }).format(n);
   };
+
+  // ---------------------------------------------------------------
+  // Formato de dinero en inputs: "$ 1.234.567,89"
+  // ---------------------------------------------------------------
+
+  function formatMoneyString(raw, maxDecimals) {
+    var cleaned = String(raw == null ? "" : raw).replace(/[^\d,]/g, "");
+    if (!cleaned) return "";
+
+    var parts = cleaned.split(",");
+    if (parts.length > 2) parts = [parts[0], parts.slice(1).join("")];
+
+    var intPart = parts[0].replace(/^0+(?=\d)/, "");
+    if (intPart === "" && parts.length > 1) intPart = "0";
+    intPart = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    var out = "$ " + intPart;
+    if (parts.length > 1) {
+      out += "," + parts[1].slice(0, maxDecimals);
+    }
+    return out;
+  }
+
+  function significantCount(str) {
+    return (String(str).match(/[\d,]/g) || []).length;
+  }
+
+  function positionAfterSignificant(formatted, count) {
+    if (count <= 0) return 0;
+    var seen = 0;
+    for (var i = 0; i < formatted.length; i++) {
+      if (/[\d,]/.test(formatted[i])) {
+        seen++;
+        if (seen >= count) return i + 1;
+      }
+    }
+    return formatted.length;
+  }
+
+  window.setupMoneyInput = function (input, maxDecimals) {
+    if (!input) return;
+    var maxDec = typeof maxDecimals === "number" && isFinite(maxDecimals) ? maxDecimals : 2;
+
+    input.setAttribute("type", "text");
+    input.setAttribute("inputmode", "decimal");
+    input.setAttribute("autocomplete", "off");
+
+    input.addEventListener("input", function () {
+      var old = input.value;
+      var sel = input.selectionStart == null ? old.length : input.selectionStart;
+      var sig = significantCount(old.slice(0, sel));
+      var formatted = formatMoneyString(old, maxDec);
+      input.value = formatted;
+      var pos = positionAfterSignificant(formatted, sig);
+      try {
+        input.setSelectionRange(pos, pos);
+      } catch (e) {
+        /* algunos navegadores no lo permiten */
+      }
+    });
+
+    input.addEventListener("blur", function () {
+      input.value = formatMoneyString(input.value, maxDec);
+    });
+
+    if (input.value) {
+      input.value = formatMoneyString(input.value, maxDec);
+    }
+  };
+
+  window.getMoneyValue = function (input) {
+    var v = String(input && input.value != null ? input.value : "")
+      .replace(/\$/g, "")
+      .replace(/\./g, "")
+      .replace(/,/g, ".")
+      .trim();
+    var n = parseFloat(v);
+    return isFinite(n) ? n : NaN;
+  };
+
+  function initMoneyInputs() {
+    document.querySelectorAll("[data-money]").forEach(function (el) {
+      var decAttr = el.getAttribute("data-money-decimals");
+      var dec = decAttr === null ? 2 : parseInt(decAttr, 10);
+      window.setupMoneyInput(el, isFinite(dec) ? dec : 2);
+    });
+  }
+
+  initMoneyInputs();
 })();

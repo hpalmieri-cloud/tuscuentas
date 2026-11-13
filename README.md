@@ -4,7 +4,7 @@ Sitio estático de calculadoras y guías simples para Argentina. **Sin registro,
 
 - **Dominio:** `tuscuentas.com.ar` (registrado, pendiente de activación).
 - **Marca:** Tus Cuentas.
-- **Contacto:** `hola@tuscuentas.com.ar`.
+- **Contacto:** `hola@tuscuentas.com.ar` (los mensajes se reciben en una casilla real; el alias del dominio queda pendiente de activación).
 
 ## Calculadoras disponibles
 
@@ -81,7 +81,8 @@ Y abrí `http://localhost:8000`.
 ## Antes de publicar (checklist)
 
 - [ ] Reemplazar `https://tuscuentas.com.ar` en `sitemap.xml` y `robots.txt` por el dominio real.
-- [ ] Reemplazar `hola@tuscuentas.com.ar` en `contacto.html` y `privacidad.html`.
+- [x] Enviar los mensajes de contacto a una casilla real, mostrando `hola@tuscuentas.com.ar` como dirección pública.
+- [ ] Configurar el reenvío real de `hola@tuscuentas.com.ar` cuando el dominio esté activo (ImprovMX o Cloudflare Email Routing).
 - [ ] Revisar fórmulas y parámetros con la normativa vigente.
 - [ ] Probar todas las calculadoras en el celular.
 - [ ] Configurar Google Search Console y enviar el sitemap.
