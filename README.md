@@ -91,6 +91,13 @@ Y abrí `http://localhost:8000`.
 2. Settings → Pages → Deploy from branch → `main` / root.
 3. URL: `https://usuario.github.io/repositorio/`.
 
+## Dominio propio
+
+El `CNAME` está preparado en `deploy/CNAME`, pero **no está activo** para no romper la URL de github.io mientras el DNS no apunte a GitHub.
+
+- Instrucciones completas: [DOMINIO.md](DOMINIO.md)
+- Activación segura, con verificación de DNS previa: `deploy\activar-dominio.ps1`
+
 ## Antes de publicar (checklist)
 
 - [ ] Reemplazar `https://tuscuentas.com.ar` en `sitemap.xml` y `robots.txt` por el dominio real.
@@ -99,6 +106,7 @@ Y abrí `http://localhost:8000`.
 - [ ] Revisar fórmulas y parámetros con la normativa vigente.
 - [ ] Probar todas las calculadoras en el celular.
 - [ ] Configurar Google Search Console y enviar el sitemap.
+- [ ] Activar el dominio propio siguiendo `DOMINIO.md`.
 
 ## AdSense (en preparación)
 
