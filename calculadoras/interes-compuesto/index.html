@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de interés compuesto 2026 — Tus Cuentas</title>
+  <meta name="description" content="Calculá cuánto crece tu ahorro con interés compuesto: capital inicial, aportes mensuales, tasa anual y años. Gratis y sin registro.">
+  <meta name="theme-color" content="#0b7a4b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b7a4b'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"¿Qué es el interés compuesto?","acceptedAnswer":{"@type":"Answer","text":"Es el interés que se calcula sobre el capital inicial más los intereses acumulados. Con el tiempo, genera un crecimiento exponencial."}},
+      {"@type":"Question","name":"¿Cómo se calcula el interés compuesto con aportes mensuales?","acceptedAnswer":{"@type":"Answer","text":"Se suma el capital inicial capitalizado y el valor futuro de los aportes mensuales, usando la tasa mensual equivalente a la tasa anual efectiva."}},
+      {"@type":"Question","name":"¿La tasa es anual o mensual?","acceptedAnswer":{"@type":"Answer","text":"En esta calculadora la tasa se ingresa como anual efectiva y se convierte a mensual para el cálculo."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">T</span><span>Tus Cuentas</span></a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="../../index.html">Inicio</a>
+        <a href="../../index.html#calculadoras">Calculadoras</a>
+        <a href="../../sobre.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Migas de pan"><a href="../../index.html">Inicio</a> › <span>Interés compuesto</span></nav>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <h1>Calculadora de interés compuesto</h1>
+        <p class="lead">Mirá cuánto puede crecer tu ahorro con aportes mensuales y una tasa anual efectiva.</p>
+
+        <form class="calc" id="form-interes" novalidate>
+          <div class="calc-grid">
+            <div class="field">
+              <label for="capital">Capital inicial (ARS)</label>
+              <input id="capital" type="number" inputmode="numeric" min="0" step="1000" placeholder="Ej.: 1000000" autocomplete="off">
+            </div>
+
+            <div class="field">
+              <label for="aporte">Aporte mensual (ARS)</label>
+              <input id="aporte" type="number" inputmode="numeric" min="0" step="1000" value="0" autocomplete="off">
+              <span class="hint">Se considera al final de cada mes.</span>
+            </div>
+
+            <div class="field">
+              <label for="tasa">Tasa anual efectiva (%)</label>
+              <input id="tasa" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Ej.: 40" autocomplete="off">
+            </div>
+
+            <div class="field">
+              <label for="anios">Plazo (años)</label>
+              <input id="anios" type="number" inputmode="numeric" min="1" max="60" step="1" value="10">
+            </div>
+          </div>
+
+          <div class="result-actions">
+            <button class="btn" type="submit">Calcular</button>
+            <button class="btn btn-secondary btn-small hidden" type="button" id="copiar">Copiar resultado</button>
+          </div>
+
+          <p class="error hidden" id="error" role="alert"></p>
+
+          <div class="result hidden" id="resultado" aria-live="polite">
+            <p class="label">Monto final estimado</p>
+            <p class="amount" id="resultado-monto">$0</p>
+            <div class="breakdown" id="desglose"></div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Cómo se calcula</h2>
+        <p>La tasa anual efectiva se convierte a mensual: <strong>i = (1 + tasa anual)<sup>1/12</sup> − 1</strong>.</p>
+        <p>El monto final suma el capital capitalizado y el valor futuro de los aportes mensuales:</p>
+        <p><strong>VF = capital × (1 + i)<sup>n</sup> + aporte × ((1 + i)<sup>n</sup> − 1) ÷ i</strong></p>
+        <p>Donde <em>n</em> es la cantidad de meses. Los aportes se consideran al final de cada mes.</p>
+        <p class="note">Es una estimación. No incluye impuestos, comisiones ni variaciones de la tasa.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq">
+          <details><summary>¿Qué es el interés compuesto?</summary><div class="faq-body">Es el interés que se calcula sobre el capital inicial más los intereses acumulados. Con el tiempo, el crecimiento se acelera.</div></details>
+          <details><summary>¿Los aportes son al inicio o al final del mes?</summary><div class="faq-body">Esta calculadora los considera al final de cada mes.</div></details>
+          <details><summary>¿Puedo usar una tasa mensual?</summary><div class="faq-body">La tasa se ingresa como anual efectiva. Si tenés una tasa mensual, convertila a anual antes de usarla.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Fuentes</h2>
+        <ul><li>Fórmulas estándar de interés compuesto y valor futuro de anualidades.</li></ul>
+        <p class="hint">Última actualización: noviembre de 2026.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><strong>Tus Cuentas</strong><br><span>© <span data-year>2026</span> · Sitio informativo. No reemplaza asesoramiento profesional.</span></div>
+      <nav class="footer-links" aria-label="Enlaces legales"><a href="../../sobre.html">Sobre</a><a href="../../contacto.html">Contacto</a><a href="../../privacidad.html">Privacidad</a></nav>
+    </div>
+  </footer>
+
+  <script src="../../assets/site.js"></script>
+  <script src="interes-compuesto.js"></script>
+</body>
+</html>

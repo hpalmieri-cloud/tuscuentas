@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de horas extras 2026 — Tus Cuentas</title>
+  <meta name="description" content="Calculá el pago de tus horas extras al 50% y al 100% según tu sueldo mensual. Resultado inmediato, gratis y sin registro.">
+  <meta name="theme-color" content="#0b7a4b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b7a4b'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"¿Cómo se calcula el valor de la hora extra?","acceptedAnswer":{"@type":"Answer","text":"Se obtiene el valor de la hora dividiendo el sueldo mensual por las horas mensuales (200 para una jornada de 48 horas semanales). Luego se aplica un recargo del 50% o del 100%."}},
+      {"@type":"Question","name":"¿Qué horas extras se pagan al 100%?","acceptedAnswer":{"@type":"Answer","text":"Las trabajadas en sábados después de las 13 horas, domingos, feriados y días de descanso. En días hábiles el recargo es del 50%."}},
+      {"@type":"Question","name":"¿El resultado incluye descuentos?","acceptedAnswer":{"@type":"Answer","text":"No. La calculadora muestra el adicional bruto; luego se aplican los aportes y contribuciones correspondientes."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">T</span><span>Tus Cuentas</span></a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="../../index.html">Inicio</a>
+        <a href="../../index.html#calculadoras">Calculadoras</a>
+        <a href="../../sobre.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Migas de pan"><a href="../../index.html">Inicio</a> › <span>Horas extras</span></nav>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <h1>Calculadora de horas extras</h1>
+        <p class="lead">Ingresá tu sueldo y las horas trabajadas para ver el adicional bruto que te corresponde.</p>
+
+        <form class="calc" id="form-horas" novalidate>
+          <div class="calc-grid">
+            <div class="field">
+              <label for="sueldo">Sueldo bruto mensual (ARS)</label>
+              <input id="sueldo" type="number" inputmode="numeric" min="0" step="1000" placeholder="Ej.: 850000" autocomplete="off">
+            </div>
+
+            <div class="field">
+              <label for="horas-mes">Horas mensuales</label>
+              <input id="horas-mes" type="number" inputmode="numeric" min="1" max="300" step="1" value="200">
+              <span class="hint">200 para jornada de 48 hs semanales. Ajustá si tu jornada es distinta.</span>
+            </div>
+
+            <div class="field">
+              <label for="horas-50">Horas extras al 50%</label>
+              <input id="horas-50" type="number" inputmode="decimal" min="0" step="0.5" value="0">
+              <span class="hint">Días hábiles.</span>
+            </div>
+
+            <div class="field">
+              <label for="horas-100">Horas extras al 100%</label>
+              <input id="horas-100" type="number" inputmode="decimal" min="0" step="0.5" value="0">
+              <span class="hint">Sábados después de las 13, domingos, feriados y descanso.</span>
+            </div>
+          </div>
+
+          <div class="result-actions">
+            <button class="btn" type="submit">Calcular horas extras</button>
+            <button class="btn btn-secondary btn-small hidden" type="button" id="copiar">Copiar resultado</button>
+          </div>
+
+          <p class="error hidden" id="error" role="alert"></p>
+
+          <div class="result hidden" id="resultado" aria-live="polite">
+            <p class="label">Adicional bruto estimado</p>
+            <p class="amount" id="resultado-monto">$0</p>
+            <div class="breakdown" id="desglose"></div>
+            <p class="hint" style="margin-top:12px">No incluye descuentos de aportes ni contribuciones.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Cómo se calcula</h2>
+        <p><strong>Valor hora = sueldo mensual ÷ horas mensuales.</strong></p>
+        <ul>
+          <li><strong>Horas al 50%:</strong> valor hora × 1,5 × cantidad de horas.</li>
+          <li><strong>Horas al 100%:</strong> valor hora × 2 × cantidad de horas.</li>
+        </ul>
+        <p>El total es la suma de ambos adicionales.</p>
+        <p class="note">El recargo del 100% aplica a sábados después de las 13 hs, domingos, feriados y días de descanso (art. 201, Ley 20.744). El resultado es bruto.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq">
+          <details><summary>¿Cómo obtengo el valor de mi hora?</summary><div class="faq-body">Dividí tu sueldo mensual por las horas mensuales. Para una jornada de 48 hs semanales se usan 200 horas.</div></details>
+          <details><summary>¿Qué horas se pagan al 100%?</summary><div class="faq-body">Las de sábados después de las 13, domingos, feriados y días de descanso. En días hábiles el recargo es del 50%.</div></details>
+          <details><summary>¿El adicional lleva descuentos?</summary><div class="faq-body">Sí, como parte del salario está sujeto a aportes. Esta calculadora muestra el monto bruto.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Fuentes</h2>
+        <ul><li>Ley 20.744 de Contrato de Trabajo, artículo 201.</li></ul>
+        <p class="hint">Última actualización: noviembre de 2026.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><strong>Tus Cuentas</strong><br><span>© <span data-year>2026</span> · Sitio informativo. No reemplaza asesoramiento profesional.</span></div>
+      <nav class="footer-links" aria-label="Enlaces legales"><a href="../../sobre.html">Sobre</a><a href="../../contacto.html">Contacto</a><a href="../../privacidad.html">Privacidad</a></nav>
+    </div>
+  </footer>
+
+  <script src="../../assets/site.js"></script>
+  <script src="horas-extras.js"></script>
+</body>
+</html>

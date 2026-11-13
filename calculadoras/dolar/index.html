@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de dólar 2026 — Tus Cuentas</title>
+  <meta name="description" content="Convertí pesos a dólares y dólares a pesos con la cotización que elijas. Cálculo inmediato, gratis y sin registro.">
+  <meta name="theme-color" content="#0b7a4b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b7a4b'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"¿Cómo convierto pesos a dólares?","acceptedAnswer":{"@type":"Answer","text":"Se divide el monto en pesos por la cotización del dólar en pesos por dólar. Por ejemplo, 100.000 pesos a 1.000 ARS/USD equivalen a 100 dólares."}},
+      {"@type":"Question","name":"¿Qué cotización conviene usar?","acceptedAnswer":{"@type":"Answer","text":"Depende de la operación: oficial, blue, MEP o tarjeta. Esta calculadora usa la cotización que ingreses manualmente, así podés probar la que necesites."}},
+      {"@type":"Question","name":"¿La calculadora actualiza la cotización sola?","acceptedAnswer":{"@type":"Answer","text":"No. Para mantener el sitio liviano y sin datos externos, la cotización se ingresa a mano."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">T</span><span>Tus Cuentas</span></a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="../../index.html">Inicio</a>
+        <a href="../../index.html#calculadoras">Calculadoras</a>
+        <a href="../../sobre.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Migas de pan"><a href="../../index.html">Inicio</a> › <span>Dólar</span></nav>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <h1>Calculadora de dólar</h1>
+        <p class="lead">Convertí entre pesos y dólares con la cotización que quieras usar. Sin datos en vivo, sin vueltas.</p>
+
+        <form class="calc" id="form-dolar" novalidate>
+          <div class="calc-grid">
+            <div class="field">
+              <label for="monto">Monto</label>
+              <input id="monto" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Ej.: 100000" autocomplete="off">
+            </div>
+
+            <div class="field">
+              <label for="cotizacion">Cotización (ARS por USD)</label>
+              <input id="cotizacion" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Ej.: 1000" autocomplete="off">
+              <span class="hint">Ingresá la cotización oficial, blue, MEP o la que necesites.</span>
+            </div>
+
+            <div class="field">
+              <label for="direccion">Conversión</label>
+              <select id="direccion">
+                <option value="ars-a-usd">Pesos (ARS) → Dólares (USD)</option>
+                <option value="usd-a-ars">Dólares (USD) → Pesos (ARS)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="result-actions">
+            <button class="btn" type="submit">Convertir</button>
+            <button class="btn btn-secondary btn-small hidden" type="button" id="copiar">Copiar resultado</button>
+          </div>
+
+          <p class="error hidden" id="error" role="alert"></p>
+
+          <div class="result hidden" id="resultado" aria-live="polite">
+            <p class="label" id="resultado-label">Equivale a</p>
+            <p class="amount" id="resultado-monto">—</p>
+            <div class="breakdown" id="desglose"></div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Cómo se calcula</h2>
+        <ul>
+          <li><strong>Pesos a dólares:</strong> monto en ARS ÷ cotización (ARS por USD).</li>
+          <li><strong>Dólares a pesos:</strong> monto en USD × cotización (ARS por USD).</li>
+        </ul>
+        <p class="note">La cotización se ingresa manualmente. Verificá el valor del día en tu banco o en una fuente oficial antes de operar.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq">
+          <details><summary>¿Qué cotización uso?</summary><div class="faq-body">Depende de la operación: oficial, blue, MEP, CCL o tarjeta. Probá con la que corresponda a tu caso.</div></details>
+          <details><summary>¿Se actualiza sola?</summary><div class="faq-body">No. Para mantener el sitio liviano y sin dependencias, la cotización se ingresa a mano.</div></details>
+          <details><summary>¿Incluye impuestos o comisiones?</summary><div class="faq-body">No. El resultado es la conversión directa, sin impuestos, comisiones ni spreads.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Fuentes</h2>
+        <ul><li>Banco Central de la República Argentina — cotizaciones de referencia.</li></ul>
+        <p class="hint">Última actualización: noviembre de 2026.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><strong>Tus Cuentas</strong><br><span>© <span data-year>2026</span> · Sitio informativo. No reemplaza asesoramiento profesional.</span></div>
+      <nav class="footer-links" aria-label="Enlaces legales"><a href="../../sobre.html">Sobre</a><a href="../../contacto.html">Contacto</a><a href="../../privacidad.html">Privacidad</a></nav>
+    </div>
+  </footer>
+
+  <script src="../../assets/site.js"></script>
+  <script src="dolar.js"></script>
+</body>
+</html>

@@ -18,6 +18,9 @@ Sitio estático de calculadoras y guías simples para Argentina. **Sin registro,
 8. Porcentajes
 9. Monotributo (tabla ARCA vigente desde el 1/8/2026)
 10. Jubilación (régimen general)
+11. Dólar (conversión ARS ↔ USD)
+12. Interés compuesto
+13. Horas extras
 
 ## Estructura
 
@@ -42,7 +45,10 @@ Sitio estático de calculadoras y guías simples para Argentina. **Sin registro,
    ├─ iva/
    ├─ porcentaje/
    ├─ monotributo/
-   └─ jubilacion/
+   ├─ jubilacion/
+   ├─ dolar/
+   ├─ interes-compuesto/
+   └─ horas-extras/
 ```
 
 Cada carpeta tiene `index.html` y su archivo `.js` con la lógica.
@@ -89,10 +95,10 @@ Y abrí `http://localhost:8000`.
 
 ## Próximas calculadoras
 
-1. Dólar / conversión
-2. Interés compuesto
-3. Horas extras
-4. Guías de trámites (ANSES, ARCA)
+1. Guías de trámites (ANSES, ARCA)
+2. Sueldo para jubilados
+3. Ahorro / meta de ahorro
+4. Conversor de unidades
 
 ## Notas
 
