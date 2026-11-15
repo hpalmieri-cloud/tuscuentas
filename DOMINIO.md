@@ -190,16 +190,30 @@ Si GitHub no lo habilita en 24 horas, podés volver a poner el proxy naranja y d
 
 Con eso `http://` redirige a `https://` aunque GitHub no lo fuerce. La desventaja es que el cifrado lo termina Cloudflare, no GitHub.
 
-## Correo: no tocar los MX
+## Correo
 
-Los registros A y CNAME son solo para la web. El correo usa registros **MX**, que son independientes. Cuando quieras activar `hola@tuscuentas.com.ar`:
+Los registros A y CNAME son solo para la web. El correo usa registros **MX**, que son independientes y no afectan al sitio.
 
-1. Creá una cuenta gratuita en ImprovMX.
-2. Agregá el dominio y el alias `hola@tuscuentas.com.ar` → `hpbusqueda@gmail.com`.
-3. Cargá en **Cloudflare → DNS** los MX que te indique ImprovMX (`mx1.improvmx.com` y `mx2.improvmx.com`, prioridades 10 y 20).
-4. Verificá el reenvío y recién ahí cambiá los `mailto:` del sitio.
+**Estado:** `hola@tuscuentas.com.ar` está activo y reenvía a `hpbusqueda@gmail.com` mediante **Cloudflare Email Routing**.
 
-No borres los MX que ya existan sin revisar qué servicio los usa.
+Registros que administra Cloudflare en la zona:
+
+| Tipo | Nombre | Valor |
+|---|---|---|
+| MX | `@` | `route1.mx.cloudflare.net` (prioridad 23) |
+| MX | `@` | `route2.mx.cloudflare.net` (prioridad 9) |
+| MX | `@` | `route3.mx.cloudflare.net` (prioridad 86) |
+| TXT | `@` | `v=spf1 include:_spf.mx.cloudflare.net ~all` |
+
+Además, Cloudflare agrega el DKIM en `cf2024-1._domainkey`.
+
+Para agregar otro alias (por ejemplo `sugerencias@`): **Email → Email Routing → Routes → Create address**.
+
+Notas:
+
+- El destino `hpbusqueda@gmail.com` debe figurar como **Verified** en *Destination addresses*; si no, los correos se rechazan.
+- Cloudflare Email Routing **no permite enviar** desde el dominio: al responder, el destinatario ve la dirección de Gmail.
+- No borres los MX ni el SPF sin revisar qué servicio los usa: si se eliminan, el alias deja de recibir.
 
 ## Notas sobre Cloudflare
 
