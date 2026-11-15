@@ -28,6 +28,9 @@ Sitio estático de calculadoras y guías simples para Argentina. **Sin registro,
 2. Cómo leer un recibo de sueldo
 3. Monotributo: inscripción y recategorización
 4. Trámite de jubilación en ANSES
+5. Indemnización por despido
+6. Vacaciones: cuántos días y cuánto se paga
+7. Horas extras al 50% y 100%
 
 ## Estructura
 
