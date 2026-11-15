@@ -167,7 +167,20 @@ $ssl.Dispose(); $tcp.Close()
 
 Si el subject es `CN=tuscuentas.com.ar` y el SAN incluye `www`, el certificado ya está emitido y solo falta que la casilla se habilite.
 
-### 4. Plan B: forzar HTTPS desde Cloudflare
+### 4. La raíz tarda unos minutos por caché
+
+Aun con “Enforce HTTPS” activo, `http://tuscuentas.com.ar/` puede seguir devolviendo 200 un rato. No es un error: GitHub sirve esa respuesta desde su CDN con `Cache-Control: max-age=600`, así que la versión sin redirect dura hasta 10 minutos.
+
+Cómo distinguirlo:
+
+```powershell
+curl.exe -sSI http://tuscuentas.com.ar/
+curl.exe -sSI http://tuscuentas.com.ar/guias/
+```
+
+Si las rutas internas ya devuelven `301 → https://` y la raíz muestra `Age:` cercano a 600, es solo caché. Esperá y volvé a probar.
+
+### 5. Plan B: forzar HTTPS desde Cloudflare
 
 Si GitHub no lo habilita en 24 horas, podés volver a poner el proxy naranja y dejar que Cloudflare haga el redirect:
 
