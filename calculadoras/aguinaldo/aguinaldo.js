@@ -79,6 +79,7 @@
 
     var semestre = selectSemestre.value;
     var etiquetaPeriodo = semestre === "1" ? "1º semestre (enero–junio)" : "2º semestre (julio–diciembre)";
+    var fechaPago = semestre === "1" ? "30 de junio" : "18 de diciembre";
 
     resultadoLabel.textContent =
       proporcion === 1 ? "Aguinaldo bruto estimado" : "Aguinaldo proporcional estimado";
@@ -88,13 +89,7 @@
     filas.push(["Mejor sueldo del semestre", fmt(mejor)]);
     filas.push(["Período", etiquetaPeriodo]);
     filas.push(["Proporción trabajada", Math.round(proporcion * 100) + "% (" + dias + "/180 días)"]);
-
-    if (proporcion === 1) {
-      filas.push(["1ª cuota (junio)", fmt(total / 2)]);
-      filas.push(["2ª cuota (diciembre)", fmt(total / 2)]);
-    } else {
-      filas.push(["Días trabajados", dias + " de 180"]);
-    }
+    filas.push(["Se abona", "Hasta el " + fechaPago]);
 
     if (descuentos) {
       filas.push(["Estimado en mano (descuento 17%)", fmt(neto)]);
@@ -108,8 +103,8 @@
 
     notaPago.textContent =
       semestre === "1"
-        ? "La primera cuota se abona hasta el 30 de junio."
-        : "La segunda cuota se abona hasta el 18 de diciembre (Ley 27.073).";
+        ? "El aguinaldo del 1º semestre se abona hasta el 30 de junio. No se paga en dos partes: ese es el total del período enero–junio."
+        : "El aguinaldo del 2º semestre se abona hasta el 18 de diciembre (Ley 27.073). Ese es el total del período julio–diciembre.";
 
     resultado.classList.remove("hidden");
     btnCopiar.classList.remove("hidden");
@@ -117,6 +112,7 @@
     ultimoTexto =
       "Aguinaldo " + (proporcion === 1 ? "estimado" : "proporcional") + ": " + fmt(total) +
       " — " + etiquetaPeriodo +
+      " — Se abona hasta el " + fechaPago +
       (descuentos ? " — En mano aprox.: " + fmt(neto) : "") +
       ". Calculado en tuscuentas.com.ar";
   }
