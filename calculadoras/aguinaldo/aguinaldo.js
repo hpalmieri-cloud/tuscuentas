@@ -15,6 +15,7 @@
   var inputDias = $("dias-trabajados");
   var checkCompleto = $("semestre-completo");
   var checkDescuentos = $("aplicar-descuentos");
+  var descuentosTexto = $("descuentos-texto");
 
   var resultado = $("resultado");
   var resultadoLabel = $("resultado-label");
@@ -29,6 +30,19 @@
   function sincronizarDias() {
     inputDias.disabled = checkCompleto.checked;
     inputDias.style.opacity = checkCompleto.checked ? ".6" : "1";
+  }
+
+  function sincronizarDescuentos() {
+    var situacion = selectSituacion.value;
+    var esJubilado = situacion === "jubilado";
+    if (descuentosTexto) {
+      descuentosTexto.textContent =
+        "Estimar el monto en mano (descuentos aproximados del " +
+        (esJubilado ? "6%" : "17%") +
+        ")";
+    }
+    checkDescuentos.disabled = situacion === "monotributista";
+    checkDescuentos.parentElement.style.opacity = situacion === "monotributista" ? ".55" : "1";
   }
 
   function mostrarError(msg) {
@@ -75,7 +89,11 @@
     var proporcion = dias / 180;
     var total = (mejor / 2) * proporcion;
     var descuentos = checkDescuentos.checked;
-    var neto = total * (1 - 0.17);
+
+    // Jubilados y pensionados no aportan al SIPA: solo obra social y PAMI.
+    var esJubilado = situacion === "jubilado";
+    var tasaDescuento = esJubilado ? 0.06 : 0.17;
+    var neto = total * (1 - tasaDescuento);
 
     var semestre = selectSemestre.value;
     var etiquetaPeriodo = semestre === "1" ? "1º semestre (enero–junio)" : "2º semestre (julio–diciembre)";
@@ -92,7 +110,11 @@
     filas.push(["Se abona", "Hasta el " + fechaPago]);
 
     if (descuentos) {
-      filas.push(["Estimado en mano (descuento 17%)", fmt(neto)]);
+      filas.push([
+        "Descuentos aplicados",
+        esJubilado ? "6% (obra social + PAMI)" : "17% (jubilación, obra social y PAMI)",
+      ]);
+      filas.push(["Estimado en mano", fmt(neto)]);
     }
 
     desglose.innerHTML = filas
@@ -137,6 +159,7 @@
     if (!resultado.classList.contains("hidden")) calcular();
   });
   selectSituacion.addEventListener("change", function () {
+    sincronizarDescuentos();
     if (!resultado.classList.contains("hidden")) calcular();
   });
   checkDescuentos.addEventListener("change", function () {
@@ -148,4 +171,5 @@
   });
 
   sincronizarDias();
+  sincronizarDescuentos();
 })();
