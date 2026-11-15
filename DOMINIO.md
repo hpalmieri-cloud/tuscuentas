@@ -1,15 +1,20 @@
 # Dominio propio: tuscuentas.com.ar
 
-Guía para conectar el dominio de nic.ar con GitHub Pages sin dejar el sitio caído.
+Guía de referencia para conectar el dominio con GitHub Pages sin dejar el sitio caído.
 
-## Estado actual
+## Estado actual (noviembre de 2026)
 
-- Dominio **registrado en nic.ar**, pendiente de activación.
-- El sitio se publica hoy en `https://hpalmieri-cloud.github.io/tuscuentas/`.
-- El archivo `CNAME` está preparado en `deploy/CNAME`, pero **no se subió al repo**.
-- `sitemap.xml` y `robots.txt` ya usan `https://tuscuentas.com.ar/`.
+- **Dominio activo:** `https://tuscuentas.com.ar` responde 200.
+- **DNS:** administrado en **Cloudflare** (nameservers `guss.ns.cloudflare.com` y `chin.ns.cloudflare.com`), con los registros en **DNS only** (nube gris).
+- **Registros:** cuatro A en el dominio raíz apuntando a `185.199.108–111.153` y CNAME `www` → `hpalmieri-cloud.github.io`.
+- **Certificado:** Let's Encrypt emitido por GitHub Pages, `CN=tuscuentas.com.ar`, SAN con `tuscuentas.com.ar` y `www.tuscuentas.com.ar`, vence el 13/02/2027.
+- **Custom domain:** configurado en GitHub → Settings → Pages; el archivo `CNAME` está en la raíz del repo.
+- **Enforce HTTPS:** habilitado.
+- `sitemap.xml` y `robots.txt` usan `https://tuscuentas.com.ar/`.
 
-## Por qué no se activa todavía
+> El registro `deploy/CNAME` y el script `deploy/activar-dominio.ps1` quedaron como respaldo histórico: el dominio ya está activo, así que no hace falta ejecutarlos.
+
+## Por qué el orden importa
 
 Cuando GitHub Pages encuentra un archivo `CNAME` en la raíz del repo, redirige todo el sitio a ese dominio. Si el DNS todavía no apunta a GitHub, el resultado es que **el sitio queda inaccesible**, incluida la URL de github.io.
 
@@ -19,9 +24,9 @@ Por eso el orden correcto es siempre:
 2. Verificar que el dominio ya resuelve a GitHub.
 3. Recién ahí subir el `CNAME`.
 
-## Paso 1: cargar el DNS en nic.ar
+## Paso 1: cargar el DNS
 
-Entrá al panel de nic.ar, buscá la administración de DNS de `tuscuentas.com.ar` y cargá estos registros:
+El dominio está registrado en nic.ar, pero los registros se administran en **Cloudflare** (ahí apuntan los nameservers). Entrá a **Cloudflare → DNS → Records** y cargá:
 
 | Tipo | Nombre / Host | Valor | TTL |
 |------|---------------|-------|-----|
@@ -68,7 +73,7 @@ Qué tenés que ver:
 - `tuscuentas.com.ar` devuelve una o más de las IP `185.199.10x.153`.
 - `www.tuscuentas.com.ar` devuelve `hpalmieri-cloud.github.io`.
 
-La propagación puede tardar desde unos minutos hasta 24–48 horas, aunque en nic.ar suele ser bastante más rápido.
+La propagación puede tardar desde unos minutos hasta 24–48 horas, aunque con Cloudflare suele ser cuestión de minutos.
 
 ## Paso 3: activar el CNAME
 
@@ -121,22 +126,74 @@ Resultado esperado:
 - La URL de github.io redirige a `tuscuentas.com.ar`.
 - `https://tuscuentas.com.ar/sitemap.xml` y `/robots.txt` responden bien.
 
+## Si “Enforce HTTPS” queda grisada
+
+Es el problema más común y casi siempre se debe a uno de estos dos motivos.
+
+### 1. El CNAME de `www` apunta mal
+
+GitHub valida el dominio completo (raíz **y** `www`) antes de habilitar el certificado. Si el CNAME de `www` apunta a un host inexistente, la casilla queda deshabilitada aunque la raíz funcione.
+
+Verificá:
+
+```powershell
+Resolve-DnsName www.tuscuentas.com.ar -Type CNAME
+nslookup www.tuscuentas.com.ar 8.8.8.8
+```
+
+Tiene que devolver `hpalmieri-cloud.github.io`. Errores frecuentes: `hpalmieri.github.io` (otra cuenta), `hpalmieri-github.io` (falta `-cloud.`) o un dominio que no resuelve.
+
+### 2. GitHub todavía no revalidó
+
+Después de corregir el DNS, GitHub puede tardar entre 15 minutos y 24 horas en volver a chequear. Mientras tanto:
+
+- No cambies el dominio personalizado.
+- No borres el `CNAME`.
+- Refrescá Settings → Pages con **Ctrl + F5** cada tanto.
+
+### 3. Cómo comprobar el certificado real
+
+```powershell
+$tcp = New-Object Net.Sockets.TcpClient('tuscuentas.com.ar', 443)
+$cb  = [System.Net.Security.RemoteCertificateValidationCallback]{ param($s,$c,$ch,$e) $true }
+$ssl = New-Object Net.Security.SslStream($tcp.GetStream(), $false, $cb)
+$ssl.AuthenticateAsClient('tuscuentas.com.ar')
+$cert = [System.Security.Cryptography.X509Certificates.X509Certificate2]$ssl.RemoteCertificate
+$cert.Subject
+$cert.NotAfter
+($cert.Extensions | Where-Object { $_.Oid.Value -eq '2.5.29.17' }).Format($false)
+$ssl.Dispose(); $tcp.Close()
+```
+
+Si el subject es `CN=tuscuentas.com.ar` y el SAN incluye `www`, el certificado ya está emitido y solo falta que la casilla se habilite.
+
+### 4. Plan B: forzar HTTPS desde Cloudflare
+
+Si GitHub no lo habilita en 24 horas, podés volver a poner el proxy naranja y dejar que Cloudflare haga el redirect:
+
+1. **SSL/TLS → Overview** → modo **Full (strict)** (ya hay certificado válido en el origen).
+2. **SSL/TLS → Edge Certificates** → **Always Use HTTPS** en ON.
+3. **SSL/TLS → Edge Certificates** → **Automatic HTTPS Rewrites** en ON.
+
+Con eso `http://` redirige a `https://` aunque GitHub no lo fuerce. La desventaja es que el cifrado lo termina Cloudflare, no GitHub.
+
 ## Correo: no tocar los MX
 
 Los registros A y CNAME son solo para la web. El correo usa registros **MX**, que son independientes. Cuando quieras activar `hola@tuscuentas.com.ar`:
 
 1. Creá una cuenta gratuita en ImprovMX.
 2. Agregá el dominio y el alias `hola@tuscuentas.com.ar` → `hpbusqueda@gmail.com`.
-3. Cargá en nic.ar los MX que te indique ImprovMX (`mx1.improvmx.com` y `mx2.improvmx.com`, prioridades 10 y 20).
+3. Cargá en **Cloudflare → DNS** los MX que te indique ImprovMX (`mx1.improvmx.com` y `mx2.improvmx.com`, prioridades 10 y 20).
 4. Verificá el reenvío y recién ahí cambiá los `mailto:` del sitio.
 
 No borres los MX que ya existan sin revisar qué servicio los usa.
 
-## Si algún día movés el DNS a Cloudflare
+## Notas sobre Cloudflare
 
-- Para GitHub Pages, los registros del dominio deben quedar en **DNS only** (nube gris), sin proxy naranja.
-- El proxy de Cloudflare puede interferir con la validación del certificado de GitHub Pages.
-- Si preferís Cloudflare Pages, entonces sí podés usar el proxy, pero es otro esquema de publicación.
+- Mientras el DNS esté en **DNS only** (nube gris), GitHub Pages emite y renueva su certificado sin interferencias. Es la configuración actual y la recomendada.
+- Si activás el proxy naranja, usá **Full (strict)**: el origen ya tiene certificado válido.
+- No uses **Flexible** con GitHub Pages: genera loops de redirección y deja el tráfico sin cifrar entre Cloudflare y GitHub.
+- Si en algún momento preferís Cloudflare Pages, ahí sí podés usar el proxy sin problema, pero es otro esquema de publicación.
 
 ## Cómo volver atrás
 
