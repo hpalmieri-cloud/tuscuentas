@@ -108,14 +108,16 @@ El sitio se publica en `https://tuscuentas.com.ar` con HTTPS. DNS en Cloudflare 
 - [ ] Configurar Google Search Console y enviar el sitemap.
 - [x] Dominio propio activo con HTTPS (`tuscuentas.com.ar`).
 
-## AdSense (en preparación)
+## AdSense
+
+**Publisher ID:** `ca-pub-1989926070258685`
 
 1. [x] Publicar 15–20 páginas con contenido original y útil (hoy hay 22: inicio, 13 calculadoras, 5 guías y 3 legales).
 2. [x] Incluir Inicio, Sobre, Contacto, Privacidad y Guías.
 3. [x] Detallar publicidad y cookies en la política de privacidad.
-4. [ ] Crear la cuenta en `adsense.google.com`.
-5. [ ] Agregar el sitio y copiar el script de verificación en el `<head>`.
-6. [ ] Crear `ads.txt` con el publisher ID (`pub-...`).
+4. [x] Crear la cuenta en `adsense.google.com`.
+5. [x] Agregar el sitio y el script de AdSense en el `<head>` de las 22 páginas.
+6. [x] Crear `ads.txt` con el publisher ID.
 7. [ ] Solicitar la revisión (puede tardar días o semanas).
 8. [ ] Después de la aprobación: insertar los bloques de anuncio y activar el mensaje de consentimiento para EEA/Reino Unido.
 
