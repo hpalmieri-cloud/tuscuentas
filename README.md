@@ -141,5 +141,5 @@ El sitio se publica en `https://tuscuentas.com.ar` con HTTPS. DNS en Cloudflare 
 
 ### Valores que cambian todos los meses
 
-- `calculadoras/jubilacion/jubilacion.js` empieza con tres constantes: `PBU`, `HABER_MINIMO` y `HABER_MAXIMO`. Se actualizan con los valores vigentes de ANSES y se revisa la fecha que se muestra en el desglose ("Valores de referencia").
+- `calculadoras/jubilacion/jubilacion.js` empieza con cuatro constantes: `PBU`, `HABER_MINIMO`, `HABER_MAXIMO` y `BONO`. Se actualizan con los valores vigentes de ANSES y se revisa la fecha que se muestra en el desglose ("Valores de referencia").
 - Los topes de monotributo están en `calculadoras/monotributo/monotributo.js`.

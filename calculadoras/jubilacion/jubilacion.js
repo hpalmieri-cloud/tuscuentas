@@ -15,6 +15,7 @@
   var PBU = 203182.22;      // Prestación Básica Universal
   var HABER_MINIMO = 444158.46;
   var HABER_MAXIMO = 2988765.82;
+  var BONO = 70000;         // Bono extraordinario (se prorratea sobre el mínimo)
 
   var inputNacimiento = $("nacimiento");
   var selectSexo = $("sexo");
@@ -60,7 +61,43 @@
     var proporcional = promedio * porcentaje / 100;
     var bruto = PBU + proporcional;
     var haber = Math.min(Math.max(bruto, HABER_MINIMO), HABER_MAXIMO);
-    return { computables: computables, porcentaje: porcentaje, proporcional: proporcional, bruto: bruto, haber: haber };
+    return { anios: anios, computables: computables, porcentaje: porcentaje, proporcional: proporcional, bruto: bruto, haber: haber };
+  }
+
+  // Agrega el desglose del haber y devuelve bono y total.
+  function desgloseHaber(filas, e, promedio) {
+    filas.push(["Prestación Básica Universal", fmt(PBU)]);
+    filas.push([
+      "Parte proporcional (" + pct(e.porcentaje) + "% de " + fmt(promedio) + ")",
+      fmt(e.proporcional)
+    ]);
+    if (e.computables < e.anios) {
+      filas.push(["Años computados en el cálculo", "35 (tope legal)"]);
+    }
+    filas.push(["Subtotal", fmt(e.bruto)]);
+
+    if (e.bruto < HABER_MINIMO) {
+      filas.push(["Se completa al haber mínimo", fmt(HABER_MINIMO)]);
+    } else if (e.bruto > HABER_MAXIMO) {
+      filas.push(["Limitado al haber máximo", fmt(HABER_MAXIMO)]);
+    } else {
+      filas.push(["Ajuste por mínimo o máximo", "No corresponde"]);
+    }
+
+    // Bono extraordinario: se suma hasta que el total llegue al mínimo + bono.
+    var bono = 0;
+    if (e.haber < HABER_MINIMO + BONO) {
+      bono = Math.min(BONO, HABER_MINIMO + BONO - e.haber);
+    }
+
+    if (bono > 0) {
+      filas.push(["Bono extraordinario", fmt(bono)]);
+      filas.push(["Total estimado a cobrar", fmt(e.haber + bono)]);
+    } else {
+      filas.push(["Bono extraordinario", "No corresponde"]);
+    }
+
+    return { bono: bono, total: e.haber + bono };
   }
 
   function textoDuracion(totalMeses) {
@@ -115,30 +152,21 @@
       filas.push(["Tiempo hasta la edad jubilatoria", textoDuracion(mesesParaEdad)]);
     }
 
-    var titulo, monto, proyeccion = null;
+    var titulo, monto, proyeccion = null, bono = 0, total = 0, haberTexto = null;
 
     if (promedio > 0 && cumpleAportes) {
       var e = estimar(promedio, aportes);
+      var r = desgloseHaber(filas, e, promedio);
+      bono = r.bono;
+      total = r.total;
+      haberTexto = fmt(e.haber);
 
-      titulo = "Haber mensual estimado";
-      monto = fmt(e.haber);
-
-      filas.push(["Prestación Básica Universal", fmt(PBU)]);
-      filas.push([
-        "Parte proporcional (" + pct(e.porcentaje) + "% de " + fmt(promedio) + ")",
-        fmt(e.proporcional)
-      ]);
-      if (e.computables < aportes) {
-        filas.push(["Años computados en el cálculo", "35 (tope legal)"]);
-      }
-      filas.push(["Subtotal", fmt(e.bruto)]);
-
-      if (e.bruto < HABER_MINIMO) {
-        filas.push(["Se completa al haber mínimo", fmt(HABER_MINIMO)]);
-      } else if (e.bruto > HABER_MAXIMO) {
-        filas.push(["Limitado al haber máximo", fmt(HABER_MAXIMO)]);
+      if (bono > 0) {
+        titulo = "Total mensual estimado con bono";
+        monto = fmt(total);
       } else {
-        filas.push(["Ajuste por mínimo o máximo", "No corresponde"]);
+        titulo = "Haber mensual estimado";
+        monto = fmt(e.haber);
       }
 
       filas.push(["Valores de referencia", "Noviembre de 2026"]);
@@ -153,7 +181,7 @@
         var proy = estimar(promedio, 30);
         proyeccion = fmt(proy.haber);
         filas.push(["Haber estimado al completar 30 años", proyeccion]);
-        filas.push(["Cálculo orientativo con " + pct(proy.porcentaje) + "% de " + fmt(promedio), fmt(proy.proporcional) + " + PBU"]);
+        desgloseHaber(filas, proy, promedio);
       }
     } else if (!cumpleEdad && cumpleAportes) {
       titulo = "Te falta edad";
@@ -166,7 +194,7 @@
         var proy2 = estimar(promedio, 30);
         proyeccion = fmt(proy2.haber);
         filas.push(["Haber estimado al completar 30 años", proyeccion]);
-        filas.push(["Cálculo orientativo con " + pct(proy2.porcentaje) + "% de " + fmt(promedio), fmt(proy2.proporcional) + " + PBU"]);
+        desgloseHaber(filas, proy2, promedio);
       }
     }
 
@@ -182,6 +210,7 @@
 
     ultimoTexto =
       "Jubilación: " + titulo + " — " + monto +
+      (bono > 0 ? " (haber " + haberTexto + " + bono " + fmt(bono) + ")" : "") +
       (proyeccion ? " (con 30 años de aportes: " + proyeccion + ")" : "") +
       " (edad actual " + edad.anios + " años, aportes " + aportes +
       ", edad jubilatoria " + edadJub + "). Calculado en tuscuentas.com.ar";
