@@ -1,4 +1,4 @@
-// Calculadora de jubilación — régimen general argentino (Ley 24.241).
+// Calculadora de jubilación — régimen general argentino.
 (function () {
   "use strict";
 
@@ -6,21 +6,10 @@
   if (!form) return;
 
   var $ = function (id) { return document.getElementById(id); };
-  var fmt = window.formatARS;
-
-  // ---------------------------------------------------------------
-  // Valores de referencia. ACTUALIZAR cuando cambien (son mensuales).
-  // Vigentes a noviembre de 2026.
-  // ---------------------------------------------------------------
-  var PBU = 203182.22;      // Prestación Básica Universal
-  var HABER_MINIMO = 444158.46;
-  var HABER_MAXIMO = 2988765.82;
-  var BONO = 70000;         // Bono extraordinario (se prorratea sobre el mínimo)
 
   var inputNacimiento = $("nacimiento");
   var selectSexo = $("sexo");
   var inputAportes = $("aportes");
-  var inputPromedio = $("promedio");
 
   var resultado = $("resultado");
   var label = $("resultado-label");
@@ -50,56 +39,6 @@
     return Math.max(0, m);
   }
 
-  function pct(n) {
-    return (Math.round(n * 10) / 10).toFixed(1).replace(/\.0$/, "").replace(".", ",");
-  }
-
-  // Art. 28: 1,5% por año de servicios, con tope de 35 años.
-  function estimar(promedio, anios) {
-    var computables = Math.min(anios, 35);
-    var porcentaje = 1.5 * computables;
-    var proporcional = promedio * porcentaje / 100;
-    var bruto = PBU + proporcional;
-    var haber = Math.min(Math.max(bruto, HABER_MINIMO), HABER_MAXIMO);
-    return { anios: anios, computables: computables, porcentaje: porcentaje, proporcional: proporcional, bruto: bruto, haber: haber };
-  }
-
-  // Agrega el desglose del haber y devuelve bono y total.
-  function desgloseHaber(filas, e, promedio) {
-    filas.push(["Prestación Básica Universal", fmt(PBU)]);
-    filas.push([
-      "Parte proporcional (" + pct(e.porcentaje) + "% de " + fmt(promedio) + ")",
-      fmt(e.proporcional)
-    ]);
-    if (e.computables < e.anios) {
-      filas.push(["Años computados en el cálculo", "35 (tope legal)"]);
-    }
-    filas.push(["Subtotal", fmt(e.bruto)]);
-
-    if (e.bruto < HABER_MINIMO) {
-      filas.push(["Se completa al haber mínimo", fmt(HABER_MINIMO)]);
-    } else if (e.bruto > HABER_MAXIMO) {
-      filas.push(["Limitado al haber máximo", fmt(HABER_MAXIMO)]);
-    } else {
-      filas.push(["Ajuste por mínimo o máximo", "No corresponde"]);
-    }
-
-    // Bono extraordinario: se suma hasta que el total llegue al mínimo + bono.
-    var bono = 0;
-    if (e.haber < HABER_MINIMO + BONO) {
-      bono = Math.min(BONO, HABER_MINIMO + BONO - e.haber);
-    }
-
-    if (bono > 0) {
-      filas.push(["Bono extraordinario", fmt(bono)]);
-      filas.push(["Total estimado a cobrar", fmt(e.haber + bono)]);
-    } else {
-      filas.push(["Bono extraordinario", "No corresponde"]);
-    }
-
-    return { bono: bono, total: e.haber + bono };
-  }
-
   function textoDuracion(totalMeses) {
     var a = Math.floor(totalMeses / 12);
     var m = totalMeses % 12;
@@ -124,12 +63,6 @@
     var aportes = parseFloat(inputAportes.value);
     if (!isFinite(aportes) || aportes < 0 || aportes > 50) return fallo("Los años de aportes deben estar entre 0 y 50.");
 
-    var promedio = 0;
-    if (inputPromedio && inputPromedio.value) {
-      promedio = window.getMoneyValue(inputPromedio);
-      if (!isFinite(promedio) || promedio < 0) return fallo("Revisá el promedio de sueldos: debe ser un monto positivo.");
-    }
-
     var edadJub = selectSexo.value === "mujer" ? 60 : 65;
     var edad = calcularEdad(nacimiento, hoy);
 
@@ -139,6 +72,24 @@
 
     var cumpleEdad = fechaEdadJub <= hoy;
     var cumpleAportes = aniosAportesFaltantes === 0;
+
+    var titulo, monto;
+    if (cumpleEdad && cumpleAportes) {
+      titulo = "Cumplís los requisitos del régimen general";
+      monto = "Sí";
+    } else if (cumpleEdad && !cumpleAportes) {
+      titulo = "Te faltan años de aportes";
+      monto = aniosAportesFaltantes + (aniosAportesFaltantes === 1 ? " año" : " años");
+    } else if (!cumpleEdad && cumpleAportes) {
+      titulo = "Te falta edad";
+      monto = textoDuracion(mesesParaEdad);
+    } else {
+      titulo = "Te faltan edad y aportes";
+      monto = textoDuracion(mesesParaEdad);
+    }
+
+    label.textContent = titulo;
+    montoEl.textContent = monto;
 
     var filas = [
       ["Edad actual", edad.anios + " años" + (edad.meses ? " y " + edad.meses + " meses" : "")],
@@ -152,55 +103,6 @@
       filas.push(["Tiempo hasta la edad jubilatoria", textoDuracion(mesesParaEdad)]);
     }
 
-    var titulo, monto, proyeccion = null, bono = 0, total = 0, haberTexto = null;
-
-    if (promedio > 0 && cumpleAportes) {
-      var e = estimar(promedio, aportes);
-      var r = desgloseHaber(filas, e, promedio);
-      bono = r.bono;
-      total = r.total;
-      haberTexto = fmt(e.haber);
-
-      if (bono > 0) {
-        titulo = "Total mensual estimado con bono";
-        monto = fmt(total);
-      } else {
-        titulo = "Haber mensual estimado";
-        monto = fmt(e.haber);
-      }
-
-      filas.push(["Valores de referencia", "Noviembre de 2026"]);
-    } else if (cumpleEdad && cumpleAportes) {
-      titulo = "Cumplís los requisitos del régimen general";
-      monto = "Sí";
-    } else if (cumpleEdad && !cumpleAportes) {
-      titulo = "Te faltan años de aportes";
-      monto = aniosAportesFaltantes + (aniosAportesFaltantes === 1 ? " año" : " años");
-
-      if (promedio > 0) {
-        var proy = estimar(promedio, 30);
-        proyeccion = fmt(proy.haber);
-        filas.push(["Haber estimado al completar 30 años", proyeccion]);
-        desgloseHaber(filas, proy, promedio);
-      }
-    } else if (!cumpleEdad && cumpleAportes) {
-      titulo = "Te falta edad";
-      monto = textoDuracion(mesesParaEdad);
-    } else {
-      titulo = "Te faltan edad y aportes";
-      monto = textoDuracion(mesesParaEdad);
-
-      if (promedio > 0) {
-        var proy2 = estimar(promedio, 30);
-        proyeccion = fmt(proy2.haber);
-        filas.push(["Haber estimado al completar 30 años", proyeccion]);
-        desgloseHaber(filas, proy2, promedio);
-      }
-    }
-
-    label.textContent = titulo;
-    montoEl.textContent = monto;
-
     desglose.innerHTML = filas
       .map(function (f) { return "<div><span>" + f[0] + "</span><span>" + f[1] + "</span></div>"; })
       .join("");
@@ -210,8 +112,6 @@
 
     ultimoTexto =
       "Jubilación: " + titulo + " — " + monto +
-      (bono > 0 ? " (haber " + haberTexto + " + bono " + fmt(bono) + ")" : "") +
-      (proyeccion ? " (con 30 años de aportes: " + proyeccion + ")" : "") +
       " (edad actual " + edad.anios + " años, aportes " + aportes +
       ", edad jubilatoria " + edadJub + "). Calculado en tuscuentas.com.ar";
   }
@@ -224,8 +124,7 @@
   }
 
   form.addEventListener("submit", function (e) { e.preventDefault(); calcular(); });
-  [inputNacimiento, inputAportes, inputPromedio].forEach(function (el) {
-    if (!el) return;
+  [inputNacimiento, inputAportes].forEach(function (el) {
     el.addEventListener("input", function () { if (!resultado.classList.contains("hidden")) calcular(); });
   });
   selectSexo.addEventListener("change", function () { if (!resultado.classList.contains("hidden")) calcular(); });

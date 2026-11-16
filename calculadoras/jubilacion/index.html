@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Calculadora de jubilación 2026: edad, aportes y haber — Tus Cuentas</title>
-  <meta name="description" content="Calculá a qué edad te jubilás, cuántos años de aportes te faltan y una estimación del haber mensual con la fórmula de la Ley 24.241, bono incluido. Gratis y sin registro.">
+  <title>Calculadora de jubilación 2026 — Tus Cuentas</title>
+  <meta name="description" content="Calculá a qué edad te jubilás, cuánto falta y cuántos años de aportes te restan según el régimen general de Argentina. Gratis y sin registro.">
   <meta name="theme-color" content="#0b7a4b">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b7a4b'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
   <link rel="canonical" href="https://tuscuentas.com.ar/calculadoras/jubilacion/">
@@ -16,9 +16,6 @@
     "mainEntity": [
       {"@type":"Question","name":"¿A qué edad me puedo jubilar en Argentina?","acceptedAnswer":{"@type":"Answer","text":"En el régimen general, las mujeres se jubilan a los 60 años y los hombres a los 65 años, con 30 años de aportes."}},
       {"@type":"Question","name":"¿Cuántos años de aportes necesito?","acceptedAnswer":{"@type":"Answer","text":"El régimen general exige 30 años de aportes previsionales."}},
-      {"@type":"Question","name":"¿Cómo se calcula el haber jubilatorio?","acceptedAnswer":{"@type":"Answer","text":"Se suman la Prestación Básica Universal (una suma fija) y un 1,5% por cada año de aportes aplicado sobre el promedio de las últimas 120 remuneraciones actualizadas. El resultado se ajusta al haber mínimo y al máximo vigentes."}},
-      {"@type":"Question","name":"¿Qué es el bono de $70.000 para jubilados?","acceptedAnswer":{"@type":"Answer","text":"Es un adicional que se suma al haber. Se paga completo a quien cobra el haber mínimo y se prorratea para haberes superiores, hasta desaparecer cuando el total alcanza el mínimo más el bono."}},
-      {"@type":"Question","name":"¿Qué promedio de sueldos se usa?","acceptedAnswer":{"@type":"Answer","text":"El promedio de las últimas 120 remuneraciones mensuales, cada una actualizada por el índice oficial y limitada al tope de la base imponible de su mes."}},
       {"@type":"Question","name":"¿Qué pasa si no tengo 30 años de aportes?","acceptedAnswer":{"@type":"Answer","text":"Existen moratorias y planes de regularización de aportes, además de regímenes especiales. Conviene consultar en ANSES para evaluar cada caso."}}
     ]
   }
@@ -46,7 +43,7 @@
     <section class="section">
       <div class="container">
         <h1>Calculadora de jubilación</h1>
-        <p class="lead">Mirá a qué edad te corresponde jubilarte, cuántos años de aportes te faltan y cuánto cobrarías de haber según el promedio de tus últimos sueldos.</p>
+        <p class="lead">Mirá a qué edad te corresponde jubilarte, cuánto falta y cuántos años de aportes te restan.</p>
 
         <form class="calc" id="form-jubilacion" novalidate>
           <div class="calc-grid">
@@ -69,12 +66,6 @@
               <input id="aportes" type="number" inputmode="numeric" min="0" max="50" step="1" value="0">
               <span class="hint">Aportes previsionales computables.</span>
             </div>
-
-            <div class="field">
-              <label for="promedio">Promedio actualizado de tus últimos 120 sueldos</label>
-              <input id="promedio" type="text" data-money inputmode="decimal" placeholder="$ 0" autocomplete="off">
-              <span class="hint">Opcional. Si lo dejás vacío, calculamos solo edad y aportes. El dato figura en Mi ANSES.</span>
-            </div>
           </div>
 
           <div class="result-actions">
@@ -88,7 +79,7 @@
             <p class="label" id="resultado-label">Resultado</p>
             <p class="amount" id="resultado-monto">—</p>
             <div class="breakdown" id="desglose"></div>
-            <p class="hint" style="margin-top:12px">Régimen general (Ley 24.241) con el bono extraordinario vigente. No considera moratorias, regímenes especiales, tareas insalubres ni el tramo autónomo. Es una estimación, no una liquidación oficial.</p>
+            <p class="hint" style="margin-top:12px">Régimen general (Ley 24.241). No considera moratorias, regímenes especiales ni tareas insalubres.</p>
           </div>
         </form>
       </div>
@@ -96,33 +87,14 @@
 
     <section class="section">
       <div class="container prose">
-        <h2>Cómo se calcula el haber</h2>
-        <p>El haber inicial del régimen general se arma con dos piezas:</p>
-        <p><strong>Haber = PBU + (1,5% × años de aportes × promedio actualizado)</strong></p>
+        <h2>Cómo se calcula</h2>
+        <p>En el régimen general se requieren <strong>dos condiciones</strong>:</p>
         <ul>
-          <li><strong>PBU:</strong> una suma fija que se paga a quien reúne los 30 años de aportes.</li>
-          <li><strong>Parte proporcional:</strong> 1,5% por cada año de servicios, con un tope de 35 años. Se aplica sobre el promedio de las últimas 120 remuneraciones.</li>
+          <li><strong>Edad:</strong> 60 años para mujeres y 65 para hombres.</li>
+          <li><strong>Aportes:</strong> 30 años de servicios con aportes.</li>
         </ul>
-        <p>El porcentaje es el mismo para los años anteriores y posteriores a julio de 1994. Lo que cambia es el nombre del concepto: prestación compensatoria para los primeros y prestación adicional por permanencia para los segundos.</p>
-
-        <h2>De dónde sale ese promedio</h2>
-        <p>ANSES toma las últimas <strong>120 remuneraciones mensuales</strong> con aportes y actualiza cada una con el índice oficial (RIPTE combinado con la movilidad previsional). Además, cada sueldo se limita al tope de la base imponible vigente en ese mes: si ganabas más que el tope, solo cuenta el tope.</p>
-        <p>Por eso dos personas con el mismo sueldo actual pueden tener haberes distintos: depende de la época en que trabajaron y de cuánto superaron los topes de entonces.</p>
-
-        <h2>El mínimo y el máximo</h2>
-        <p>El resultado nunca queda por debajo del <strong>haber mínimo garantizado</strong> ni por encima del <strong>haber máximo</strong>. Si el cálculo da menos, ANSES completa la diferencia; si da más, se recorta al tope.</p>
-        <p>A ese haber se le suma, cuando corresponde, un <strong>bono extraordinario de $70.000</strong>. Si cobrás el mínimo, el bono es completo y el total llega a <strong>$514.158,46</strong>. Si tu haber está entre el mínimo y ese total, el bono se paga proporcional: la suma exacta para llegar a $514.158,46. Por encima de ese monto, no corresponde.</p>
-        <p>Los cuatro valores de referencia que usa esta calculadora —PBU, mínimo, máximo y bono— cambian con el tiempo. Están actualizados a <strong>noviembre de 2026</strong> y se muestran en el desglose para que puedas verificarlos.</p>
-
-        <h2>Qué no incluye</h2>
-        <ul>
-          <li><strong>Tramo autónomo o monotributo:</strong> se liquida por separado, sobre la renta de referencia de cada categoría.</li>
-          <li><strong>Moratorias y planes de pago:</strong> permiten completar años, pero no modifican la fórmula.</li>
-          <li><strong>Regímenes especiales:</strong> docentes, tareas insalubres, jubilación por edad avanzada y otros tienen reglas propias.</li>
-          <li><strong>Exceso de edad:</strong> por cada dos años que superes la edad jubilatoria se compensa un año de aportes faltantes.</li>
-        </ul>
-
-        <p class="note">Esta calculadora es informativa. El haber definitivo lo determina ANSES al otorgar el beneficio, con tu historia laboral completa. Antes de tomar decisiones, consultá tu historia en Mi ANSES o con un especialista previsional.</p>
+        <p>La calculadora muestra la edad actual, la fecha estimada en que alcanzás la edad jubilatoria y los años de aportes que te faltan.</p>
+        <p class="note">Hay regímenes especiales (docentes, tareas insalubres, etc.) y moratorias que pueden modificar el resultado. Consultá siempre en ANSES o con un especialista previsional.</p>
       </div>
     </section>
 
@@ -132,9 +104,6 @@
         <div class="faq">
           <details><summary>¿A qué edad me jubilo?</summary><div class="faq-body">En el régimen general: mujeres a los 60 años y hombres a los 65.</div></details>
           <details><summary>¿Cuántos años de aportes necesito?</summary><div class="faq-body">30 años de aportes previsionales.</div></details>
-          <details><summary>¿Cómo se calcula el haber?</summary><div class="faq-body">PBU (suma fija) más 1,5% por año de aportes aplicado al promedio actualizado de las últimas 120 remuneraciones, con tope de 35 años.</div></details>
-          <details><summary>¿Qué es el bono de $70.000?</summary><div class="faq-body">Es un adicional que se suma al haber. Se paga completo a quien cobra el mínimo y se prorratea para haberes apenas superiores, hasta desaparecer cuando el total llega a $514.158,46.</div></details>
-          <details><summary>¿Qué promedio de sueldos se usa?</summary><div class="faq-body">El de las últimas 120 remuneraciones, cada una actualizada por el índice oficial y limitada al tope de la base imponible de su mes.</div></details>
           <details><summary>¿Si no llego a los 30 años de aportes?</summary><div class="faq-body">Existen moratorias y planes de pago de aportes. ANSES evalúa cada situación particular.</div></details>
           <details><summary>¿Los jubilados cobran aguinaldo?</summary><div class="faq-body">Sí. Podés calcularlo con nuestra <a href="../aguinaldo/index.html">calculadora de aguinaldo</a>.</div></details>
         </div>
@@ -145,10 +114,8 @@
       <div class="container prose">
         <h2>Fuentes</h2>
         <ul>
-          <li>Ley 24.241 — Sistema Integrado de Jubilaciones y Pensiones, arts. 24, 27 y 28.</li>
-          <li>Ley 27.609 — movilidad previsional e índice de actualización.</li>
-          <li>Disposiciones de la Subsecretaría de Seguridad Social — coeficientes de actualización trimestrales.</li>
-          <li>ANSES — requisitos y valores vigentes.</li>
+          <li>Ley 24.241 — Sistema Integrado de Jubilaciones y Pensiones.</li>
+          <li>ANSES — Requisitos para jubilarse.</li>
         </ul>
         <p class="hint">Última actualización: noviembre de 2026.</p>
       </div>
