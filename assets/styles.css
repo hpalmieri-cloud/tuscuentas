@@ -93,6 +93,7 @@ h1,h2,h3{line-height:1.15}
   background:#fff;color:var(--tinta);width:100%;
 }
 .field input:focus,.field select:focus{outline:3px solid rgba(11,122,75,.2);border-color:var(--verde)}
+.field input[readonly]{background:#f4f6f5;color:var(--gris);cursor:default}
 .hint{font-size:.85rem;color:var(--gris)}
 .check{display:flex;align-items:flex-start;gap:10px;font-size:.95rem;margin:10px 0;cursor:pointer}
 .check input{width:18px;height:18px;accent-color:var(--verde);margin-top:3px;flex:none}

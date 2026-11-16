@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Calculadora de dólar 2026 — Tus Cuentas</title>
-  <meta name="description" content="Convertí pesos a dólares y dólares a pesos con la cotización que elijas. Cálculo inmediato, gratis y sin registro.">
+  <title>Calculadora de dólar hoy: oficial, blue, MEP, CCL y tarjeta — Tus Cuentas</title>
+  <meta name="description" content="Convertí pesos y dólares con la cotización del día: oficial, blue, MEP, CCL y tarjeta. Se actualiza sola, con opción manual. Gratis y sin registro.">
   <meta name="theme-color" content="#0b7a4b">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b7a4b'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
   <link rel="canonical" href="https://tuscuentas.com.ar/calculadoras/dolar/">
@@ -14,9 +14,11 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      {"@type":"Question","name":"¿Cómo convierto pesos a dólares?","acceptedAnswer":{"@type":"Answer","text":"Se divide el monto en pesos por la cotización del dólar en pesos por dólar. Por ejemplo, 100.000 pesos a 1.000 ARS/USD equivalen a 100 dólares."}},
-      {"@type":"Question","name":"¿Qué cotización conviene usar?","acceptedAnswer":{"@type":"Answer","text":"Depende de la operación: oficial, blue, MEP o tarjeta. Esta calculadora usa la cotización que ingreses manualmente, así podés probar la que necesites."}},
-      {"@type":"Question","name":"¿La calculadora actualiza la cotización sola?","acceptedAnswer":{"@type":"Answer","text":"No. Para mantener el sitio liviano y sin datos externos, la cotización se ingresa a mano."}}
+      {"@type":"Question","name":"¿Cómo convierto pesos a dólares?","acceptedAnswer":{"@type":"Answer","text":"Se divide el monto en pesos por la cotización de venta del dólar elegido. Por ejemplo, 100.000 pesos a 1.575 ARS/USD equivalen a 63,49 dólares."}},
+      {"@type":"Question","name":"¿Qué cotización conviene usar?","acceptedAnswer":{"@type":"Answer","text":"Depende de la operación: oficial, blue, MEP, CCL o tarjeta. Esta calculadora trae la cotización de cada tipo y usa la venta para comprar dólares y la compra para venderlos."}},
+      {"@type":"Question","name":"¿La calculadora actualiza la cotización sola?","acceptedAnswer":{"@type":"Answer","text":"Sí. Consulta dolarapi.com al abrir la página y muestra la hora del último dato. Si el servicio no responde, la cotización se puede ingresar a mano."}},
+      {"@type":"Question","name":"¿Por qué usa compra o venta según el caso?","acceptedAnswer":{"@type":"Answer","text":"Porque no es lo mismo comprar que vender dólares. Si comprás, pagás el precio de venta; si vendés, te pagan el de compra. La diferencia entre ambos es el spread."}},
+      {"@type":"Question","name":"¿El dólar tarjeta incluye impuestos?","acceptedAnswer":{"@type":"Answer","text":"La cotización de tarjeta que se muestra es la del oficial más el 30% de percepción. No incluye otros impuestos ni comisiones del banco."}}
     ]
   }
   </script>
@@ -43,7 +45,7 @@
     <section class="section">
       <div class="container">
         <h1>Calculadora de dólar</h1>
-        <p class="lead">Convertí entre pesos y dólares con la cotización que quieras usar. Sin datos en vivo, sin vueltas.</p>
+        <p class="lead">Convertí entre pesos y dólares con la cotización del día. Elegí oficial, blue, MEP, CCL o tarjeta, o cargá tu propio valor.</p>
 
         <form class="calc" id="form-dolar" novalidate>
           <div class="calc-grid">
@@ -53,9 +55,16 @@
             </div>
 
             <div class="field">
-              <label for="cotizacion">Cotización (ARS por USD)</label>
-              <input id="cotizacion" type="text" inputmode="decimal" data-money min="0" placeholder="Ej.: 1.000" autocomplete="off">
-              <span class="hint">Ingresá la cotización oficial, blue, MEP o la que necesites.</span>
+              <label for="tipo">Tipo de dólar</label>
+              <select id="tipo">
+                <option value="oficial" selected>Oficial</option>
+                <option value="blue">Blue</option>
+                <option value="mep">MEP</option>
+                <option value="ccl">CCL</option>
+                <option value="tarjeta">Tarjeta</option>
+                <option value="manual">Otro / manual</option>
+              </select>
+              <span class="hint">Cotización automática de dolarapi.com.</span>
             </div>
 
             <div class="field">
@@ -64,6 +73,13 @@
                 <option value="ars-a-usd">Pesos (ARS) → Dólares (USD)</option>
                 <option value="usd-a-ars">Dólares (USD) → Pesos (ARS)</option>
               </select>
+              <span class="hint">Comprar dólares usa la venta; venderlos usa la compra.</span>
+            </div>
+
+            <div class="field">
+              <label for="cotizacion">Cotización (ARS por USD)</label>
+              <input id="cotizacion" type="text" inputmode="decimal" data-money min="0" placeholder="Ej.: 1.575" autocomplete="off" readonly aria-readonly="true">
+              <span class="hint" id="cotizacion-hint">Cargando la cotización…</span>
             </div>
           </div>
 
@@ -78,6 +94,7 @@
             <p class="label" id="resultado-label">Equivale a</p>
             <p class="amount" id="resultado-monto">—</p>
             <div class="breakdown" id="desglose"></div>
+            <p class="hint" style="margin-top:12px">Cotización de referencia. Los bancos y las casas de cambio pueden aplicar otro valor, comisiones o impuestos.</p>
           </div>
         </form>
       </div>
@@ -87,10 +104,25 @@
       <div class="container prose">
         <h2>Cómo se calcula</h2>
         <ul>
-          <li><strong>Pesos a dólares:</strong> monto en ARS ÷ cotización (ARS por USD).</li>
-          <li><strong>Dólares a pesos:</strong> monto en USD × cotización (ARS por USD).</li>
+          <li><strong>Pesos a dólares:</strong> monto en ARS ÷ cotización de <strong>venta</strong>.</li>
+          <li><strong>Dólares a pesos:</strong> monto en USD × cotización de <strong>compra</strong>.</li>
         </ul>
-        <p class="note">La cotización se ingresa manualmente. Verificá el valor del día en tu banco o en una fuente oficial antes de operar.</p>
+        <p>La diferencia entre compra y venta es el <strong>spread</strong>: es lo que gana la casa de cambio o el banco. Por eso la calculadora usa la venta cuando comprás dólares y la compra cuando los vendés.</p>
+
+        <h2>De dónde sale la cotización</h2>
+        <p>Al abrir la página se consultan las cotizaciones publicadas por <strong>dolarapi.com</strong>, que reúne los valores del mercado y los actualiza cada pocos minutos. Debajo del campo se muestra la hora del último dato.</p>
+        <p>Si el servicio no responde, la calculadora no se rompe: el campo se habilita para que ingreses la cotización a mano. También podés elegir <strong>"Otro / manual"</strong> si querés usar el valor de tu banco o el de otra fuente.</p>
+
+        <h2>Qué significa cada tipo</h2>
+        <ul>
+          <li><strong>Oficial:</strong> el del Banco de la Nación, regulado por el BCRA.</li>
+          <li><strong>Blue:</strong> el del mercado informal.</li>
+          <li><strong>MEP:</strong> se obtiene comprando bonos en pesos y vendiéndolos en dólares; es legal y bancarizado.</li>
+          <li><strong>CCL:</strong> contado con liquidación, similar al MEP pero con los dólares en el exterior.</li>
+          <li><strong>Tarjeta:</strong> el oficial más el 30% de percepción, para consumos en el exterior.</li>
+        </ul>
+
+        <p class="note">Los valores son de referencia y cambian durante el día. Antes de operar, confirmá la cotización en tu banco o casa de cambio.</p>
       </div>
     </section>
 
@@ -98,9 +130,11 @@
       <div class="container">
         <h2>Preguntas frecuentes</h2>
         <div class="faq">
-          <details><summary>¿Qué cotización uso?</summary><div class="faq-body">Depende de la operación: oficial, blue, MEP, CCL o tarjeta. Probá con la que corresponda a tu caso.</div></details>
-          <details><summary>¿Se actualiza sola?</summary><div class="faq-body">No. Para mantener el sitio liviano y sin dependencias, la cotización se ingresa a mano.</div></details>
-          <details><summary>¿Incluye impuestos o comisiones?</summary><div class="faq-body">No. El resultado es la conversión directa, sin impuestos, comisiones ni spreads.</div></details>
+          <details><summary>¿Qué cotización uso?</summary><div class="faq-body">Depende de la operación: oficial, blue, MEP, CCL o tarjeta. Elegí la que corresponda a tu caso en el desplegable.</div></details>
+          <details><summary>¿Se actualiza sola?</summary><div class="faq-body">Sí. Se consulta dolarapi.com al abrir la página y se muestra la hora del último dato. Si no responde, podés ingresar la cotización a mano.</div></details>
+          <details><summary>¿Usa compra o venta?</summary><div class="faq-body">Para pasar de pesos a dólares usa la venta, porque es el precio que pagás al comprar. Para pasar de dólares a pesos usa la compra, porque es lo que te pagan al vender.</div></details>
+          <details><summary>¿Incluye impuestos o comisiones?</summary><div class="faq-body">No. El resultado es la conversión directa, sin impuestos, comisiones ni spreads adicionales. El dólar tarjeta ya viene con el 30% de percepción.</div></details>
+          <details><summary>¿Puedo usar el valor de mi banco?</summary><div class="faq-body">Sí. Elegí "Otro / manual" y escribí la cotización que te pasó el banco o la casa de cambio.</div></details>
         </div>
       </div>
     </section>
@@ -108,7 +142,10 @@
     <section class="section">
       <div class="container prose">
         <h2>Fuentes</h2>
-        <ul><li>Banco Central de la República Argentina — cotizaciones de referencia.</li></ul>
+        <ul>
+          <li>dolarapi.com — cotizaciones de oficial, blue, MEP, CCL, tarjeta y otras.</li>
+          <li>Banco Central de la República Argentina — cotizaciones de referencia.</li>
+        </ul>
         <p class="hint">Última actualización: noviembre de 2026.</p>
       </div>
     </section>

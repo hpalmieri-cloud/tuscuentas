@@ -18,7 +18,7 @@ Sitio estático de calculadoras y guías simples para Argentina. **Sin registro,
 8. Porcentajes
 9. Monotributo (tabla ARCA vigente desde el 1/8/2026)
 10. Jubilación (régimen general): edad, aportes y haber estimado
-11. Dólar (conversión ARS ↔ USD)
+11. Dólar (conversión ARS ↔ USD con cotización automática de 5 tipos)
 12. Interés compuesto
 13. Horas extras
 
@@ -138,6 +138,10 @@ El sitio se publica en `https://tuscuentas.com.ar` con HTTPS. DNS en Cloudflare 
 - No hay dependencias ni build: HTML, CSS y JavaScript puro.
 - Carpeta sincronizada con OneDrive: cerrar archivos antes de operaciones grandes de git.
 - Los resultados son estimaciones informativas, no asesoramiento profesional.
+
+### Dependencias externas
+
+- La calculadora de dólar consulta `https://dolarapi.com/v1/dolares` desde el navegador (sin clave ni backend). Si el servicio no responde, el campo de cotización se habilita para carga manual. La fuente se menciona en `privacidad.html`.
 
 ### Valores que cambian todos los meses
 
