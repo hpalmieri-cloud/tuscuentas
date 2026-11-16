@@ -78,10 +78,6 @@
     return cotizaciones[CASAS[selectTipo.value]] || null;
   }
 
-  function aplicaVenta() {
-    return selectDireccion.value === "ars-a-usd";
-  }
-
   // Deja el campo de cotización en el estado que corresponde.
   function aplicarCotizacion() {
     if (esManual()) {
@@ -107,12 +103,12 @@
       return;
     }
 
-    var valor = aplicaVenta() ? datos.venta : datos.compra;
+    var valor = datos.venta;
     inputCotizacion.value = fmtRate(valor);
     inputCotizacion.readOnly = true;
     inputCotizacion.setAttribute("aria-readonly", "true");
     hintCotizacion.textContent =
-      (aplicaVenta() ? "Venta" : "Compra") + " · actualizado " + fmtHora(datos.fechaActualizacion) + " · dolarapi.com";
+      "Venta · actualizado " + fmtHora(datos.fechaActualizacion) + " · dolarapi.com";
   }
 
   function cargarCotizaciones() {
@@ -183,7 +179,7 @@
 
     if (tipo) {
       filas.push(["Tipo de dólar", tipo]);
-      filas.push(["Cotización usada", fmtRate(cotizacion) + " por USD (" + (esArsAUsd ? "venta" : "compra") + ")"]);
+      filas.push(["Cotización usada", fmtRate(cotizacion) + " por USD"]);
       if (datos) filas.push(["Actualizado", fmtHora(datos.fechaActualizacion)]);
     } else {
       filas.push(["Cotización usada", fmtRate(cotizacion) + " por USD"]);

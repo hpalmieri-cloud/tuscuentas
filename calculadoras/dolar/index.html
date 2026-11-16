@@ -15,9 +15,9 @@
     "@type": "FAQPage",
     "mainEntity": [
       {"@type":"Question","name":"¿Cómo convierto pesos a dólares?","acceptedAnswer":{"@type":"Answer","text":"Se divide el monto en pesos por la cotización de venta del dólar elegido. Por ejemplo, 100.000 pesos a 1.575 ARS/USD equivalen a 63,49 dólares."}},
-      {"@type":"Question","name":"¿Qué cotización conviene usar?","acceptedAnswer":{"@type":"Answer","text":"Depende de la operación: oficial, blue, MEP, CCL o tarjeta. Esta calculadora trae la cotización de cada tipo y usa la venta para comprar dólares y la compra para venderlos."}},
+      {"@type":"Question","name":"¿Qué cotización conviene usar?","acceptedAnswer":{"@type":"Answer","text":"Depende de la operación: oficial, blue, MEP, CCL o tarjeta. Esta calculadora trae la cotización de cada tipo y usa siempre el precio de venta."}},
       {"@type":"Question","name":"¿La calculadora actualiza la cotización sola?","acceptedAnswer":{"@type":"Answer","text":"Sí. Consulta dolarapi.com al abrir la página y muestra la hora del último dato. Si el servicio no responde, la cotización se puede ingresar a mano."}},
-      {"@type":"Question","name":"¿Por qué usa compra o venta según el caso?","acceptedAnswer":{"@type":"Answer","text":"Porque no es lo mismo comprar que vender dólares. Si comprás, pagás el precio de venta; si vendés, te pagan el de compra. La diferencia entre ambos es el spread."}},
+      {"@type":"Question","name":"¿La calculadora usa el precio de compra o de venta?","acceptedAnswer":{"@type":"Answer","text":"Usa siempre el de venta, que es el que se muestra habitualmente. Si vas a vender dólares, el banco o la casa de cambio te va a pagar el de compra, un poco menos; la diferencia es el spread."}},
       {"@type":"Question","name":"¿El dólar tarjeta incluye impuestos?","acceptedAnswer":{"@type":"Answer","text":"La cotización de tarjeta que se muestra es la del oficial más el 30% de percepción. No incluye otros impuestos ni comisiones del banco."}}
     ]
   }
@@ -73,7 +73,7 @@
                 <option value="ars-a-usd">Pesos (ARS) → Dólares (USD)</option>
                 <option value="usd-a-ars">Dólares (USD) → Pesos (ARS)</option>
               </select>
-              <span class="hint">Comprar dólares usa la venta; venderlos usa la compra.</span>
+              <span class="hint">Se usa siempre la cotización de venta.</span>
             </div>
 
             <div class="field">
@@ -105,9 +105,9 @@
         <h2>Cómo se calcula</h2>
         <ul>
           <li><strong>Pesos a dólares:</strong> monto en ARS ÷ cotización de <strong>venta</strong>.</li>
-          <li><strong>Dólares a pesos:</strong> monto en USD × cotización de <strong>compra</strong>.</li>
+          <li><strong>Dólares a pesos:</strong> monto en USD × cotización de <strong>venta</strong>.</li>
         </ul>
-        <p>La diferencia entre compra y venta es el <strong>spread</strong>: es lo que gana la casa de cambio o el banco. Por eso la calculadora usa la venta cuando comprás dólares y la compra cuando los vendés.</p>
+        <p>La calculadora usa siempre el precio de <strong>venta</strong>, que es el que se muestra habitualmente. Si vas a vender dólares, el banco o la casa de cambio te va a pagar el precio de <strong>compra</strong>, un poco menos: la diferencia entre ambos es el <strong>spread</strong>.</p>
 
         <h2>De dónde sale la cotización</h2>
         <p>Al abrir la página se consultan las cotizaciones publicadas por <strong>dolarapi.com</strong>, que reúne los valores del mercado y los actualiza cada pocos minutos. Debajo del campo se muestra la hora del último dato.</p>
@@ -132,7 +132,7 @@
         <div class="faq">
           <details><summary>¿Qué cotización uso?</summary><div class="faq-body">Depende de la operación: oficial, blue, MEP, CCL o tarjeta. Elegí la que corresponda a tu caso en el desplegable.</div></details>
           <details><summary>¿Se actualiza sola?</summary><div class="faq-body">Sí. Se consulta dolarapi.com al abrir la página y se muestra la hora del último dato. Si no responde, podés ingresar la cotización a mano.</div></details>
-          <details><summary>¿Usa compra o venta?</summary><div class="faq-body">Para pasar de pesos a dólares usa la venta, porque es el precio que pagás al comprar. Para pasar de dólares a pesos usa la compra, porque es lo que te pagan al vender.</div></details>
+          <details><summary>¿Usa compra o venta?</summary><div class="faq-body">Usa siempre la venta, que es el precio que ves publicado. Si vas a vender dólares, tu banco o casa de cambio te va a pagar la compra, un poco menos. La diferencia es el spread.</div></details>
           <details><summary>¿Incluye impuestos o comisiones?</summary><div class="faq-body">No. El resultado es la conversión directa, sin impuestos, comisiones ni spreads adicionales. El dólar tarjeta ya viene con el 30% de percepción.</div></details>
           <details><summary>¿Puedo usar el valor de mi banco?</summary><div class="faq-body">Sí. Elegí "Otro / manual" y escribí la cotización que te pasó el banco o la casa de cambio.</div></details>
         </div>
